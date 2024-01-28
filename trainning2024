@@ -1,0 +1,313 @@
+
+
+DEVOPS BOOTCAMP (fast track trainning - 25 Hours)
+
+Trainer : Er Sanjeev Thapa/ 9815489555 / RHCE, RHCSA, OPENSTACK CLOUD, DEVOPS, MTCNA, MTCTCE, IPv6 SE
+
+
+
+Prerequisite Knowledge 
+-------------------------
+Rating on tough to learn: Ranking in 10
+[1 easy , 2 soft, ........, 10 - v v hard]
+
+	Non Experiencied in Programming: 7
+	Experiencied in Programming: 2
+	Non Experiencied in Opertional(like networking, os): 6
+	Experiencied in Opertional(like networking, os): 2
+	Non IT but prior seeking IT industry: 9
+
+
+git: https://github.com/sanjeevlcc/devopstranning2024.git
+
+
+Who this Bootcamp is for:
+---------------------------
+	Begineers
+	Software Developers
+	System Administrators
+	Network Engineers
+	Cloud Engineers
+	Testing Engineers / QA
+
+
+
+
+One important thing beforehand:
+-----------------------------------
+Since DevOps covers the whole software development lifecycle, it  
+means you work with lots of technologies. Plus DevOps is still
+evolving and there are lots of new tools being developed all the
+time.
+So you have to be comfortable with constantly learning and
+expanding your knowledge, even after you have become a DevOps
+engineer.
+
+
+
+
+===============================================================
+Module-I: Deploying an Application Using CI/CD Pipeline 
+===============================================================
+
+
+DevOps Introduction
+------------------------------------------------------------------------------------------------------------ [ 1 HOURS]
+	Software Development Life Cycle (SDLC)
+	Traditional Models of SDLC
+	What is DevOps?
+	DevOps Lifecycle & Tools
+	What is IaC (Infrastructure as Code) & IaC Tools
+	Introduction to SRE
+	Introduction to Microservices 
+
+
+
+
+Virtual Machine & Linux
+------------------------------------------------------------------------------------------------------------ [ 3 HOURS]
+	Intro to VM an types and Install VMware Workstation Software
+	Create a Virtual Machine (VM) & Installing CentOS/RHEL/Ubuntu OS into the VM
+	Creating Clone of a Virtual Machine
+
+	Fundamental Linux Commands
+	Getting Help in Linux
+	Managing Users And Groups in Linux
+	Managing Permission on a File/Dir in Linux
+	Managing Packages in Linux
+	Creating a Bash Shell Script in Linux
+	Scheduling a Task in Linux
+	Viewing Logs in Linux
+	Configuring Network in Linux
+	Managing Services in Linux
+	Managing Firewall in Linux
+
+	Remote Login Using SSH in Linux 
+
+
+
+
+
+
+Apache & Nginx - Web Server
+------------------------------------------------------------------------------------------------------------  [ 1 HOURS]
+	Installing & Configuring Apache HTTP Web Server to Host PHP & Python based Applications
+	Installing & Configuring Nginx Web Server to Host PHP and Python based Applications 
+	Configuring Load Balancer and Reverse Proxy using Nginx
+
+
+
+
+
+Tomcat – Application Server
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	What is an Application Server?
+	Webservers Vs Application Server
+	What is Tomcat?
+	Installing Tomcat
+	Configuring Tomcat to Deploy Java Web Applications 
+
+
+
+
+
+Apache Maven – A Build Automation Tool
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	What is Maven?
+	Installing and Configuring Maven
+	Creating a Java-Based Web Application for Hello World Using Maven
+	Compiling and Packing Java Web Application Using Maven
+	Deploying the Java Web Application on Tomcat Server 
+
+
+
+
+
+Git - Version Control System
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	What is Git?
+	What is GitHub?
+	Installing Git
+	Configuring Jenkins for Git [On Jenkins]
+	Creating an Account on Github
+	Creating a Local Git Repository
+	Link the local Git Repository with Remote Github Repository
+	Typical Git Operations (add, commit, pull, clone, push, tag, ….)
+	Undo Changes
+	Creating Branches
+	Merging Branches
+	Developer’s Collaboration in Github 
+
+
+
+
+
+
+
+
+
+Jenkins – Continuous Integration & Continuous Deployment (CI/CD)
+------------------------------------------------------------------------------------------------------------  [ 3 HOURS]
+	What is Jenkins
+	Understanding CI/CD Pipelines
+	Jenkins Architecture: Master & Slave
+	Installing Jenkins Server
+	Configuring Jenkins Server to Set Path for Java, Maven & Git
+	Managing Plugins
+	Installing Required Plugins for Git, Maven, Tomcat & Web Server [Github Integration, Maven Invoker, Deploy to Container & Publish Over SSH]
+	Adding Slave Node in Jenkins
+	Managing Users in Jenkins
+	Managing Roles in Jenkins 
+
+
+
+
+
+Creating a Simple CI/CD Pipeline [v v immp]
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	Create a CI/CD Pipeline for Automated Deployment of Java-Based Web Application on Tomcat Server
+	Create a CI/CD Pipeline for Automated Deployment of PHP-Based Application on Apache & Nginx Web Servers
+	Create a CI/CD Pipeline for Automated Deployment of Python-Based Application on Apache HTTPD & Nginx Web Server 
+
+
+
+
+
+
+===============================================================
+Module-II: DevOps in Advanced Level 
+===============================================================
+
+
+Ansible – Automation Tool (IMP BUT EXTRA)
+------------------------------------------------------------------------------------------------------------
+	What is Ansible?
+	Ansible Architecture
+	Installing Ansible
+	Setting Up Environment for Ansible
+	YAML Basics
+	Executing adhoc command
+	Writing Some Typical Ansible Playbooks
+	Writing Ansible Playbook to Deploy Web Server
+
+
+	Using Ansible as Deployment Tool in CI/CD Pipeline 
+
+
+
+
+
+Docker – Containerization Platform (IMP)
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	What is Docker & What is Container
+	Containers Vs Virtual Machine
+	Benefits of Using Containers
+	Installing Docker
+	Typical Docker Operations 
+		(Search Image, Download Image, List Image, Create Container from Image, 
+		Expose an Application on a Port, Run a Container, Start/Stop a Container, 
+		Remove a Container & Image, etc)
+	Provisioning Containerized Services
+	Attaching Persistent Storage to Containers
+	Creating a Dockerfile/Containerfile and Building a Custom Image
+	Deploy an Application on Docker Container Using CI/CD Pipeline 
+
+
+
+
+
+
+
+Docker & Ansible Together – Build and Automate Deployment of Application
+------------------------------------------------------------------------------------------------------------
+	Using both Docker & Ansible as Deployment tool for Deploying an Application Using CI/CD Pipeline 
+
+
+
+
+
+
+
+Kubernetes - Scaling & Managing Containerized Applications
+-----------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	Introduction to Kubernetes
+	Kubernetes Architecture
+	Installing Kubernetes on Master and Worker Nodes
+	Creating and Managing Pods
+	Creating and Managing Service
+	Creating and Managing Replica Controller
+	Creating and Managing Deployment
+	Deploying an Application on Kubernetes Cluster Using Git, Jenkins & Ansible Using CI/CD Pipeline [v v v imp]
+
+
+
+
+OpenShift - Deploying Containerized Applications
+------------------------------------------------------------------------------------------------------------ [imp but MISC]
+	OpenShift Architecture
+	Creating Containerized Services
+	Managing Containers
+	Managing Container Images
+	Creating Containerized Applications with Source-to-Image
+	Deploying Multi Container Applications on OpenShift 
+
+
+
+
+AWS – Cloud Platform
+------------------------------------------------------------------------------------------------------------  [ 1 HOURS]
+	Introduction to AWS
+	Understanding AWS Architecture
+	Working with IAM
+	Working with EC2
+
+
+
+Terraform – Infrastructure Coding
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+	Deploying Terraform Configuration
+	Updating Configuration with More Resources
+	Configuring Resources after Configuration
+	Adding New Provider To Your Configuration
+
+
+
+Telemetry/ Tools Monitoring 
+------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
+Nagios or Prometheus and Grafana
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Execuitve Summary
+======================
+	As a DevOps engineer you will not be programming the application, but as you are working closely with the development team to improve and automate tasks for them
+	How developers work and collaborate (Agile, Jira workflows)
+	How applications are configured (Build & packaging Tools)
+	Automated testing and test scopes
+	
+	You need to know the basics of how to administer a server and install different tools on it.
+	As containers have become the new standard of software packaging, you will most probably run your application as a container.
+	
+	CICD: In DevOps, all code changes, like new  features or bug fixes, need to be  integrated in the existing application and deployed for the end user continuously and in an automated way.
+
+	Docker: Nowadays many companies use virtual infrastructure on the cloud, instead of managing their own infrastructure. These are Infrastructure as a Service (IaaS) platforms, which offer a range of additional services, like backup, security, load balancing etc. 
+	
+	K8: Since containers are popular and easy to use, many companies are running hundreds or thousands of containers on multiple servers. This means these containers need to be managed somehow 	 
+
+
