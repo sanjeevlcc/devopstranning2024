@@ -16,25 +16,26 @@ Prerequisite Knowledge
 -------------------------
 Rating on tough to learn: Ranking in 10
 
-		1 ⋅ easy
-		2 ⋅⋅ soft
-		3 ⋅⋅⋅⋅ medium
-		4 ⋅⋅⋅⋅⋅⋅ moderate
-		5 ⋅⋅⋅⋅⋅⋅⋅⋅ challenging
-		6 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ demanding
-		7 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ intricate
-		8 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ complex
-		9 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ intricate
-		10 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ v v hard
+		1 * easy
+		2 ** soft
+		3 *** medium
+		4 **** moderate
+		5 ***** challenging
+		6 ****** demanding
+		7 ******* intricate
+		8 ******** complex
+		9 ********* v intricate
+		10 ********** v v hard
 
 
-	Non Experiencied in Programming: 7
 
-	Experiencied in Programming: 2
+	Non Experiencied in Programming: 8
 
-	Non Experiencied in Opertional(like networking, os): 6
+	Experiencied in Programming: 4
 
-	Experiencied in Opertional(like networking, os): 2
+	Non Experiencied in Opertional(like networking, os): 7
+
+	Experiencied in Opertional(like networking, os): 3
 
 	Non IT but prior seeking IT industry: 9
 
@@ -301,6 +302,9 @@ Telemetry/ Tools Monitoring
 
 
 
+===============================================================
+Module-III: Dev security ops ( advanced ) 
+===============================================================
 
 
 Security in DevOps:
