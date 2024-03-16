@@ -254,7 +254,7 @@ OpenShift - Deploying Containerized Applications
 
 
 
-AWS – Cloud Platform
+AWS – Cloud Platform (or Azure/ GCP/ digitalOcean)
 ------------------------------------------------------------------------------------------------------------  [ 1 HOURS]
 	Introduction to AWS
 	Understanding AWS Architecture
@@ -296,18 +296,34 @@ Nagios or Prometheus and Grafana
 
 Execuitve Summary
 ======================
-	As a DevOps engineer you will not be programming the application, but as you are working closely with the development team to improve and automate tasks for them
+	As a DevOps engineer you will not be programming the application, but as you are working 
+	closely with the development team to improve and automate tasks for them
+	
 	How developers work and collaborate (Agile, Jira workflows)
+		
 	How applications are configured (Build & packaging Tools)
+		
 	Automated testing and test scopes
 	
 	You need to know the basics of how to administer a server and install different tools on it.
-	As containers have become the new standard of software packaging, you will most probably run your application as a container.
-	
-	CICD: In DevOps, all code changes, like new  features or bug fixes, need to be  integrated in the existing application and deployed for the end user continuously and in an automated way.
 
-	Docker: Nowadays many companies use virtual infrastructure on the cloud, instead of managing their own infrastructure. These are Infrastructure as a Service (IaaS) platforms, which offer a range of additional services, like backup, security, load balancing etc. 
-	
-	K8: Since containers are popular and easy to use, many companies are running hundreds or thousands of containers on multiple servers. This means these containers need to be managed somehow 	 
+
+	As containers have become the new standard of software packaging, you will 
+	most probably run your application as a container.
+
+
+	CICD: In DevOps, all code changes, like new  features or bug fixes,
+	need to be  integrated in the existing application and deployed for the 
+	end user continuously and in an automated way.
+
+
+	Docker: Nowadays many companies use virtual infrastructure on the 
+	cloud, instead of managing their own infrastructure. These are Infrastructure as a Service (IaaS) platforms,
+	which offer a range of additional services, like backup, security, load balancing etc. 
+
+
+	K8: Since containers are popular and easy to use, many companies are running 
+	hundreds or thousands of containers on multiple servers. 
+	This means these containers need to be managed somehow 	 
 
 
