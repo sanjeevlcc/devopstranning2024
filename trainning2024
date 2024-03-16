@@ -1,24 +1,44 @@
+git: https://github.com/sanjeevlcc/devopstranning2024.git
 
 
+=================================================
 DEVOPS BOOTCAMP (fast track trainning - 25 Hours)
+=================================================
 
-Trainer : Er Sanjeev Thapa/ 9815489555 / RHCE, RHCSA, OPENSTACK CLOUD, DEVOPS, MTCNA, MTCTCE, IPv6 SE
+=========================================================================
+Trainer : Er Sanjeev Thapa/ 9815489555 / 
+	   RHCE, RHCSA, OPENSTACK CLOUD, DEVOPS, MTCNA, MTCTCE, IPv6 SE
+=========================================================================
 
 
 
 Prerequisite Knowledge 
 -------------------------
 Rating on tough to learn: Ranking in 10
-[1 easy , 2 soft, ........, 10 - v v hard]
+
+		1 ⋅ easy
+		2 ⋅⋅ soft
+		3 ⋅⋅⋅⋅ medium
+		4 ⋅⋅⋅⋅⋅⋅ moderate
+		5 ⋅⋅⋅⋅⋅⋅⋅⋅ challenging
+		6 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ demanding
+		7 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ intricate
+		8 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ complex
+		9 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ intricate
+		10 ⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅⋅ v v hard
+
 
 	Non Experiencied in Programming: 7
+
 	Experiencied in Programming: 2
+
 	Non Experiencied in Opertional(like networking, os): 6
+
 	Experiencied in Opertional(like networking, os): 2
+
 	Non IT but prior seeking IT industry: 9
 
 
-git: https://github.com/sanjeevlcc/devopstranning2024.git
 
 
 Who this Bootcamp is for:
@@ -35,13 +55,13 @@ Who this Bootcamp is for:
 
 One important thing beforehand:
 -----------------------------------
-Since DevOps covers the whole software development lifecycle, it  
-means you work with lots of technologies. Plus DevOps is still
-evolving and there are lots of new tools being developed all the
-time.
-So you have to be comfortable with constantly learning and
-expanding your knowledge, even after you have become a DevOps
-engineer.
+	Since DevOps covers the whole software development lifecycle, it  
+	means you work with lots of technologies. Plus DevOps is still
+	evolving and there are lots of new tools being developed all the
+	time.
+	So you have to be comfortable with constantly learning and
+	expanding your knowledge, even after you have become a DevOps
+	engineer.
 
 
 
@@ -179,8 +199,8 @@ Module-II: DevOps in Advanced Level
 ===============================================================
 
 
-Ansible – Automation Tool (IMP BUT EXTRA)
-------------------------------------------------------------------------------------------------------------
+Ansible – Automation Tool 
+------------------------------------------------------------------------------------------------------------ (IMP BUT EXTRA)
 	What is Ansible?
 	Ansible Architecture
 	Installing Ansible
@@ -219,7 +239,7 @@ Docker – Containerization Platform (IMP)
 
 
 Docker & Ansible Together – Build and Automate Deployment of Application
-------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------ 
 	Using both Docker & Ansible as Deployment tool for Deploying an Application Using CI/CD Pipeline 
 
 
@@ -274,15 +294,45 @@ Terraform – Infrastructure Coding
 
 Telemetry/ Tools Monitoring 
 ------------------------------------------------------------------------------------------------------------  [ 2 HOURS]
-Nagios or Prometheus and Grafana
+	Nagios or Prometheus and Grafana
+	Monitoring infrastructure, applications, and performance metrics.
+	Log aggregation and analysis.
 
 
 
 
 
 
+Security in DevOps:
+------------------------------------------------------------------------------------------------------------  [ MISC]
+	Understanding security concerns in DevOps practices.
+	Implementing security measures in CI/CD pipelines.
+	Compliance and governance.
 
 
+Collaboration and Communication Tools:
+------------------------------------------------------------------------------------------------------------  [MISC]
+	Effective use of collaboration tools (e.g., Slack, Microsoft Teams).
+	Knowledge sharing and documentation (e.g., Confluence, Wiki).
+
+
+DevOps Culture and Team Dynamics:
+------------------------------------------------------------------------------------------------------------  [MISC]
+	Building a DevOps culture within teams.
+	Cross-functional collaboration between development, operations, and other stakeholders.
+	Agile methodologies and DevOps integration.
+
+
+Case Studies and Real-world Applications:
+------------------------------------------------------------------------------------------------------------  [MISC]
+	Analysis of case studies from industry implementations.
+	Practical exercises and hands-on projects to apply DevOps principles.
+
+
+DevOps Tools Ecosystem:
+------------------------------------------------------------------------------------------------------------  [MISC]
+	Exploring a wide range of DevOps tools and technologies.
+	Understanding their use cases and integration points.
 
 
 
