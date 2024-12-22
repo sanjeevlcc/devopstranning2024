@@ -1,0 +1,3254 @@
+
+
+
+
+
+types of data
+====================
+
+quantative measurement data
+-------------------------------
+  height of pepople , page lde times, stock prices etc
+
+
+          discrete data
+          --------------
+          
+          integer based, often counts of some events
+          
+          how many purchase   did a customer make in a year?
+          how many times did I flip "head"?
+          
+          
+          continous data
+          ------------
+          has a infinite number of possible values
+          
+          how much time did it take a user to check out for shopping?
+          how much rain fell in a given dy?
+          
+
+
+categoricl data
+-----------------------
+
+quantattive data that has no inherit mathematical meaning
+
+      gender, yes/no(binary data), race, state of resident,
+      product category, political party etc
+
+
+      you can assign numbers to categories in order to represent
+      them more compactly , but the numbers dont't have mathematical meaning.
+
+
+
+
+Ordinal data
+----------------
+a mixture of numerical and categorical data
+
+categorical data that has mahematical meaning
+
+    example   moie rating on a 1-5 scale 
+    but these vaues have mathematical meaning
+      1 means its a worse movie than 2
+ 
+
+
+
+Quizz
+----- find in numerical, categorical or ordinal?
+
+          How much gas is in your gas tank?
+          
+          The races of your class mates  
+          
+          ages in years
+          
+          money spend in store
+          
+          a rrting of health on choices for 1-poor, 
+          2-moderate, 3-good, 4- excellent
+
+
+
+                              numerical - continous
+                              categorical
+                              numerical- discrete
+                              numerical - continous
+                              ordinal- discrete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MEAN , Median, MODE
+====================
+
+
+MEAN
+------
+
+AKA average
+Sum / no of samples
+
+eg
+  no of children in each house in my street
+      0,2,3,2,1,0,0,2,0
+
+      men = (0+2+3+2+1+0+0+2+0) / 9 = 1.11  childrens
+
+
+
+
+
+
+
+MEDIAN
+--------
+
+sort the values , and take the value in the mid point
+
+    eg  0,2,3,2,1,0,0,2,0
+    sorting .......
+        0,0,0,0,1,2,2,2,3
+                ^
+                median = 1
+
+
+
+
+
+
+
+If you have an even number of samples,
+take the agerage of the two in the middle.
+
+Median is less susceptibe to outliners than the mean.
+
+    example:
+        mean household income in the US is $ 72641 , 
+        but the median is only $5193, because the mean 
+        is skewed by a handful of billionares.
+
+        median better represent the "typicl" American in this eample.
+
+
+
+
+
+
+
+
+
+MODE
+------
+
+the most comon value in a data set
+  not relevent to continous numerial data.
+
+back to our number of kids in each house example
+
+       0,2,3,2,1,0,0,2,0
+        How many eahvalue are there
+          0:4, 1:1, 2:3 , 3:1
+            The mode is 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Using mean, median, and mode in Python
+ Introduce NumPy
+====================
+
+Example 1: 
+---------------
+
+Let's walk through an example of calculating mean, median, and mode 
+with a real-world dataset, like students' scores in a test.
+
+We'll first set up the example dataset and then compute these statistics
+using Python in a Jupyter Notebook.
+
+Dataset Example: Students' Scores
+
+     Student	   Score
+     -------     ------
+          A    	  85
+          B    	  90
+          C    	  78
+          D    		85
+          E    		92
+          F    		88
+          G    		78
+          H    		85
+          I    		94
+          J    		88
+
+
+
+    Steps to Calculate
+          Mean: The average score.
+          Median: The middle value when the scores are sorted.
+          Mode: The score that appears most frequently.
+
+
+Python Code Example
+Here’s how you can calculate these 
+statistics in a Jupyter Notebook.
+
+
+``````````````````````````````````````````````````````````
+import numpy as np
+from scipy import stats
+
+# Dataset: Students' Scores
+scores = [85, 90, 78, 85, 92, 88, 78, 85, 94, 88]
+
+# 1. Calculate Mean
+mean_score = np.mean(scores)
+print(f"Mean (Average) Score: {mean_score}")
+
+# 2. Calculate Median
+median_score = np.median(scores)
+print(f"Median Score: {median_score}")
+
+# 3. Calculate Mode
+mode_score = stats.mode(scores, keepdims=True)
+print(f"Mode Score: {mode_score.mode[0]}, Frequency: {mode_score.count[0]}")
+
+``````````````````````````````````````````````````````````
+
+            output
+            .........
+            
+            Mean (Average) Score: 86.3
+            Median Score: 86.5
+            Mode Score: 85, Frequency: 3
+
+
+            Case Discussion
+            .................
+            Use Case: If a teacher analyzes these scores:
+            The mean gives the average performance.
+            The median indicates the central tendency, unaffected by outliers.
+            The mode reveals the most common score.
+
+
+
+Here’s how to calculate mean, median, and mode and also 
+visualize the data using a graph (e.g., a histogram with markers 
+for these statistics).
+
+Full Example with Graph
+
+``````````````````````````````````````````````````````````
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+
+# Dataset: Students' Scores
+scores = [85, 90, 78, 85, 92, 88, 78, 85, 94, 88]
+
+# 1. Calculate Mean
+mean_score = np.mean(scores)
+
+# 2. Calculate Median
+median_score = np.median(scores)
+
+# 3. Calculate Mode
+mode_score = stats.mode(scores, keepdims=True)
+
+# 4. Plot the data
+plt.figure(figsize=(8, 6))
+plt.hist(scores, bins=8, color='skyblue', edgecolor='black', alpha=0.7)
+
+# Add lines for mean, median, and mode
+plt.axvline(mean_score, color='red', linestyle='--', label=f'Mean: {mean_score:.2f}')
+plt.axvline(median_score, color='green', linestyle='--', label=f'Median: {median_score:.2f}')
+plt.axvline(mode_score.mode[0], color='orange', linestyle='--', label=f'Mode: {mode_score.mode[0]}')
+
+# Add labels and legend
+plt.title('Histogram of Students\' Scores with Mean, Median, and Mode')
+plt.xlabel('Scores')
+plt.ylabel('Frequency')
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Show the plot
+plt.show()
+``````````````````````````````````````````````````````````
+
+
+
+Example 2:
+-------------
+
+import numpy as np
+
+incomes = np.random.normal(27000, 15000, 10000)
+np.mean(incomes)
+
+
+
+
+      np.random.normal(27000, 15000, 10000):
+      
+            This generates 10,000 random income values.
+            The values follow a normal (Gaussian) distribution.
+            The mean (μ) of the distribution is 27,000.
+            The standard deviation (σ) is 15,000.
+      
+      np.mean(incomes):
+      
+            This calculates the arithmetic mean of the generated income sample.
+
+
+
+
+MEDIAN
+------
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+plt.hist(incomes, 50)
+plt.show()
+
+
+np.median(incomes)
+
+incomes = np.append(incomes, [1000000000])
+np.median(incomes)
+
+
+
+
+
+
+
+MODE
+-------
+ages = np.random.randint(18, high=90, size=500)
+ages
+
+
+from scipy import stats
+stats.mode(ages)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+# Generate random data
+po = np.random.normal(100.0, 20.0, 10000)
+
+# Calculate statistics
+mean = np.mean(po)
+median = np.median(po)
+mode = stats.mode(po, keepdims=True).mode[0]
+
+# Print the calculated values
+print(f"Mean: {mean}")
+print(f"Median: {median}")
+print(f"Mode: {mode}")
+
+# Plot histogram
+plt.hist(po, bins=50, alpha=0.7, color='blue', edgecolor='black', label='Data')
+
+# Add vertical lines for mean, median, and mode
+plt.axvline(mean, color='red', linestyle='dashed', linewidth=2, label=f'Mean: {mean:.2f}')
+plt.axvline(median, color='green', linestyle='dashed', linewidth=2, label=f'Median: {median:.2f}')
+plt.axvline(mode, color='orange', linestyle='dashed', linewidth=2, label=f'Mode: {mode:.2f}')
+
+# Add labels and legend
+plt.title("Histogram of Data with Mean, Median, and Mode")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
+plt.legend()
+
+# Show the plot
+plt.show()
+
+
+
+--------------------------------------------------
+
+
+
+-------------------MODE---------------------------
+import numpy as np
+from scipy import stats
+
+# Generate random ages
+ages = np.random.randint(18, high=60 ,size=5000)
+
+# Calculate the mode
+mode_result = stats.mode(ages, keepdims=True)
+
+# Print results
+print(f"Mode: {mode_result.mode[0]}")
+print(f"Count: {mode_result.count[0]}")
+
+
+import matplotlib.pyplot as plt
+
+# Plot histogram
+plt.hist(ages, bins=20, color='blue', edgecolor='black', alpha=0.7)
+
+# Highlight the mode
+plt.axvline(mode_result.mode[0], color='red', linestyle='dashed', linewidth=2, label=f'Mode: {mode_result.mode[0]}')
+
+# Add labels and legend
+plt.title("Histogram of Ages with Mode")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.legend()
+
+# Show the plot
+plt.show()
+
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Variation and Standard Deviation
+=====================================
+
+          IMAGE: https://github.com/sanjeevlcc/learning2081/blob/main/anaconda/2_histogram.PNG
+          
+          
+          This is an example of a histogram visualizing a dataset. 
+          Here's an analysis of the histogram:
+          
+          
+          
+          Title:
+              The title "Histogram of arrivals" suggests that this
+              dataset measures the number of arrivals per minute.
+          
+          
+          
+          X-axis:
+              Labelled as "Arrivals per minute," indicating that the
+              horizontal axis represents the number of arrivals.
+          
+          
+          
+          Y-axis:
+              Labelled as "Frequency," meaning the vertical axis 
+              shows how often specific values (arrivals per minute) 
+              occur in the dataset.
+          
+          
+          Bins:
+          The data is grouped into bins (intervals). 
+          Each bar represents the frequency of values falling 
+          within that interval.
+          The bin widths appear to be uniform, suggesting
+          consistent intervals (e.g., 0–2, 2–4, etc.).
+          
+          
+          Color:
+          The histogram uses a rainbow color scheme to 
+          differentiate the bars visually, but this is stylistic 
+          and does not encode additional data.
+          
+          
+          Data Distribution:
+                The histogram has a peak around 4–6 arrivals per minute, meaning 
+                most arrivals occur within this range.
+                The distribution appears to be right-skewed (a longer tail
+                on the right side), suggesting that higher values (e.g., 8–12) 
+                are less frequent.
+          
+          
+          Summary
+                This histogram effectively shows the frequency of
+                arrivals per minute, with most values clustered 
+                around 4–6 arrivals. The skewness indicates a majority 
+                of arrivals are concentrated in the lower range, with 
+                fewer instances of high arrival rates.
+
+
+
+
+
+
+Variation 
+----------------- how much  spread in your data set ?
+        
+        Variance (6 ^2) or (sigma squared) is simply the
+        agerage of squared difference from the mean.
+        
+        example:
+            what is the variance of the data set ( 1,4,5,4,8 ) ?
+        
+            first, find the mean: 1+4+5+4+8   /    8    = 4.4
+            now find the difference from mean:   3.4  -0.4   0.6   -0.4   3.6
+            find the squared difference:    11.56    0.16      0.36   0.16  12. 96
+            find the average of the squared difference : 
+                (6^2) =( 11.56 + 0.16 + 0.36+ 0.16 +1296) / 5
+                      = 5.04
+        
+        
+
+
+
+
+
+Standard Deviation
+-------------------  square root of variance
+
+          
+          (sigma ^ 2) = 5.04
+          
+          sigma = 2.24 
+          
+          
+          so SD of  1,4,5,4,8 is 2.24
+          
+          
+          
+          this is usually as a way to identify outliners.
+          Data point that lie more than one SD from the 
+          mean can be cnsidred unuswal.
+          
+          We can talk abut like, how extreme a data point 
+          is by talking about , " how many sigmas" away from the mean is.
+          
+          
+
+
+
+
+POPULATION vs SAMPLE
+---------------------
+        If we are working with a sample data instead of an 
+        entire dataset( i.e the entire population)....
+        
+        then use the " sample variance" instead of a polulation
+        variance.
+        
+        for N samples, divide the square variance by N-1 , instead N
+        
+        SO Population variance from example
+        (sigma^2) =( 11.56 + 0.16 + 0.36+ 0.16 +1296) / 5   = 5.04
+        
+        But Sample variance is 
+        (sigma^2) =( 11.56 + 0.16 + 0.36+ 0.16 +1296) / (5 -1 )  = 6.3
+
+
+
+
+            Population variance
+            (sigma^2) =  (X- u) ^2 / N
+            
+            Sample variance 
+            (sigma^2) =  (X- M) ^2 / N - 1
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+
+incomes = np.random.normal(100.0, 50.0, 10000)
+
+plt.hist(incomes, 50)
+plt.show()
+
+print("SD is:",incomes.std())
+print("SD is:",incomes.var())
+------------------------------------
+
+
+
+
+SD is: 50.10018325583198
+SD is: 2510.028362267947
+
+
+
+
+
+
+
+
+
+
+                            ---------
+                              CASE
+                            ---------
+Six Sigma case scenario for iPhone production, let's
+assume the production of 1 million (10 lakh) 
+iPhone 15 units in 2024. 
+
+
+            
+            
+            We will calculate the number of defective pieces for different 
+            Sigma levels (3, 4, 5, and 6 Sigma), 
+            analyze standard deviation (SD), 
+            mean, 
+            variance,
+            and create relevant visualizations 
+            such as a normal distribution graph and 
+            sigma-level graphs using Python.
+            
+            
+            
+            Here is the breakdown for each sigma level:
+            
+            Six Sigma: 3.4 defects per million units (DPMO).
+            Five Sigma: 233 defects per million units.
+            Four Sigma: 6,210 defects per million units.
+            Three Sigma: 66,807 defects per million units.
+            
+
+
+
+Python Code 
+
+---------------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Total production
+total_production = 1000000
+
+# Defects per million for different sigma levels
+defects_per_million = {
+    '3 Sigma': 66807,  # 3 defects per 1000 units
+    '4 Sigma': 6210,   # 4 defects per 1000 units
+    '5 Sigma': 233,    # 5 defects per 1000 units
+    '6 Sigma': 3.4     # 6 defects per 1000 units
+}
+
+# Calculate the number of defective pieces for each sigma level
+defective_pieces = {sigma: int(total_production * (defects / 1000000)) for sigma, defects in defects_per_million.items()}
+
+# Print defective pieces for each sigma level
+for sigma, defective in defective_pieces.items():
+    print(f"{sigma}: {defective} defective pieces")
+
+# Create a normal distribution for defect analysis (for 6 Sigma case)
+mean = 0  # Assuming mean defects is 0
+sd = 3.4  # Standard deviation corresponding to 6 Sigma
+x = np.linspace(-4 * sd, 4 * sd, 1000)  # Creating a range for the x-axis
+y = (1/(sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean)/sd)**2)  # Normal distribution formula
+
+# Create a plot
+plt.figure(figsize=(10, 6))
+plt.plot(x, y, label="Normal Distribution (6 Sigma)", color='b')
+plt.fill_between(x, y, color='skyblue', alpha=0.5)
+plt.title('Defect Distribution for 6 Sigma', fontsize=16)
+plt.xlabel('Defective Pieces (Deviation from Mean)', fontsize=12)
+plt.ylabel('Probability Density', fontsize=12)
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Now let's plot a graph for defects at different sigma levels
+
+# Sigma level vs defective pieces
+sigma_levels = ['3 Sigma', '4 Sigma', '5 Sigma', '6 Sigma']
+defective_counts = list(defective_pieces.values())
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x=sigma_levels, y=defective_counts, palette='viridis')
+plt.title('Defective Pieces at Different Sigma Levels', fontsize=16)
+plt.xlabel('Sigma Level', fontsize=12)
+plt.ylabel('Number of Defective Pieces', fontsize=12)
+plt.grid(True)
+plt.show()
+
+# Statistics: Mean, Variance, and Standard Deviation
+mean_defects = np.mean(defective_counts)
+variance_defects = np.var(defective_counts)
+std_dev_defects = np.std(defective_counts)
+
+print(f"Mean Defective Pieces: {mean_defects}")
+print(f"Variance of Defective Pieces: {variance_defects}")
+print(f"Standard Deviation of Defective Pieces: {std_dev_defects}")
+
+
+----------------------------------------------------------------------------
+            3 Sigma: 66807 defective pieces
+            4 Sigma: 6210 defective pieces
+            5 Sigma: 233 defective pieces
+            6 Sigma: 3 defective pieces
+
+
+
+
+
+          Mean Defective Pieces: 18313.25
+          Variance of Defective Pieces: 790073286.1875
+          Standard Deviation of Defective Pieces: 28108.242317645905
+
+
+
+
+Explanation:
+------------
+    Defective Pieces Calculation:
+        We calculate the number of defective pieces
+        based on the defects per million for each sigma level.
+    
+    
+    Normal Distribution Graph: 
+        For the 6 Sigma case, 
+        we assume a mean of zero and a standard deviation corresponding 
+        to the 6 Sigma defect rate. A normal distribution graph is generated 
+        to show the defect distribution.
+        
+    
+    Bar Plot for Defective Pieces: 
+        This shows the number of defective pieces at each sigma level.
+    
+    
+    Statistics (Mean, Variance, and Standard Deviation): 
+        These are calculated and printed to give insights into the 
+        distribution of defective pieces.
+    
+
+
+Expected Output:
+------------------
+Defective pieces for each sigma level (3 Sigma, 4 Sigma, 5 Sigma, and 6 Sigma).
+
+A graph showing the normal distribution for the 6 Sigma case.
+
+A bar graph comparing the number of defective pieces at different sigma levels.
+
+Mean, Variance, and Standard Deviation of defective pieces across the sigma levels.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Probability Density Function and Probability Mass Function
+========================================================
+
+https://x.com/akshay_pachaar/status/1649752439271354368
+
+
+http://130.149.89.49:2080/v2016/books/usb/default.htm?startat=pt01ch02s12aus30.html
+
+
+https://en.wikipedia.org/wiki/Probability_density_function
+
+
+
+
+
+
+https://github.com/sanjeevlcc/learning2081/blob/main/anaconda/2_Probability%20Density%20Function%20Probability%20Mass%20Function.PNG
+
+        PDFs are used for continuous random variables.   
+        
+        The total area under the PDF curve is 1.   
+        
+        The area under the curve within a certain range 
+        represents the probability of the random variable 
+        falling within that  range
+        
+
+
+        
+        Bell-shaped curve: The distribution is symmetrical
+        and has a bell-like shape, with the highest point 
+        at the center.
+        
+        Mean, Median, and Mode: In a normal distribution, the mean,
+        median, and mode all coincide at the center of the curve.
+        
+        Standard Deviation (σ): The curve is divided into 
+        sections based on standard deviations from the mean. 
+        The image shows markings for -3σ, -2σ, -1σ, 0 (mean), 1σ, 
+        2σ, and 3σ.
+        
+        Percentages: Percentages are shown within the sections, 
+        indicating the proportion of data that falls within each
+        range of standard deviations. For example, roughly 68% of
+        the data falls within one standard deviation of the mean,
+        95% within two standard deviations, and 99.7% within three 
+        standard deviations.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Common Data Distributions (Normal, Binomial, Poisson, etc)
+=======================================================================
+
+
+## Uniform Distribution
+## Normal / Gaussian
+## Exponential PDF / "Power Law"
+## Binomial Probability Mass Function
+## Poisson Probability Mass Function
+
+What's the equivalent of a probability distribution function
+when using discrete instead of continuous data?
+
+
+
+## Uniform Distribution
+-------------------------------
+%matplotlib inline
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+values = np.random.uniform(-10.0, 10.0, 100000)
+plt.hist(values, 50)
+plt.show()
+-------------------------------
+
+
+
+
+
+## Normal / Gaussian
+Visualize the probability density function:
+
+-------------------------------
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+
+x = np.arange(-3, 3, 0.001)
+plt.plot(x, norm.pdf(x))
+-------------------------------
+
+
+-------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+
+mu = 5.0
+sigma = 2.0
+values = np.random.normal(mu, sigma, 10000)
+plt.hist(values, 50)
+plt.show()
+-------------------------------
+
+
+
+
+
+
+
+
+
+## Exponential PDF / "Power Law"
+-------------------------------
+from scipy.stats import expon
+import matplotlib.pyplot as plt
+
+x = np.arange(0, 10, 0.001)
+plt.plot(x, expon.pdf(x))
+-------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Binomial Probability Mass Function
+-------------------------------
+from scipy.stats import binom
+import matplotlib.pyplot as plt
+
+n, p = 10, 0.5
+x = np.arange(0, 10, 0.001)
+plt.plot(x, binom.pmf(x, n, p))
+-------------------------------
+
+
+
+
+
+
+
+
+
+
+
+## Poisson Probability Mass Function
+Example: My website gets on average 500 visits per day. 
+What's the odds of getting 550?
+-------------------------------
+from scipy.stats import poisson
+import matplotlib.pyplot as plt
+
+mu = 500
+x = np.arange(400, 600, 0.5)
+plt.plot(x, poisson.pmf(x, mu))
+-------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              *******************
+                              CASE SCNNERIO - 1
+                              *******************
+
+
+
+Hospital Patient Arrivals
+-----------------------------
+
+Let’s create a real-life case scenario to demonstrate 
+          Uniform Distribution,
+          Normal/Gaussian Distribution, 
+          Exponential Distribution (Power Law), 
+          Binomial Distribution, and 
+          Poisson Distribution.
+
+
+Scenario:
+---------
+      Imagine a hospital that serves a city. The hospital deals with 
+      different types of events, such as the arrival of patients, which we model
+      with different probability distributions.
+      We can model the number of patients arriving in different time frames, the
+      distribution of patient arrival times, etc.
+
+
+
+Here are the specific cases we’ll cover:
+----------------------------------------
+        Uniform Distribution: 
+            Assume the hospital receives an equal number of patients between 
+            8 AM and 10 AM
+            every day (i.e., patients arrive uniformly between these two times).
+        
+        Normal/Gaussian Distribution: 
+            Patient wait times in the ER are normally distributed, with
+            most patients having a wait time close to the average time
+            and fewer patients experiencing very long or short waits.
+        
+        Exponential Distribution: 
+            The time between patient arrivals at the hospital follows 
+            an exponential distribution (common for events that occur 
+            continuously and independently over time).
+        
+        Binomial Distribution: 
+            The hospital performs a certain number of medical tests on
+            patients. Let’s assume 100 patients are tested, and each 
+            has a 70% chance of testing positive for a disease.
+        
+        Poisson Distribution: 
+            The hospital receives a certain number of emergency calls
+            per hour, which is modeled using a Poisson distribution. 
+            The average number of calls per hour is 5.
+
+
+
+
+Assumptions:
+--------------
+          Time between patient arrivals is 5 minutes on average
+          for the Exponential Distribution.
+          
+          Average patient wait time is 30 minutes with a standard 
+          deviation of 10 minutes for the Normal Distribution.
+          
+          100 tests are performed with a 70% probability of testing
+          positive for the Binomial Distribution.
+          
+          The hospital receives 5 emergency calls per hour on average
+          for the Poisson Distribution.
+          
+          We use uniform arrival times between 8 AM and 10 AM for
+          the Uniform Distribution.
+          
+
+
+
+
+
+
+
+Python Code Implementation:
+------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import binom, poisson, norm, expon, uniform
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# 1. Uniform Distribution: Patient arrivals between 8 AM to 10 AM (between 0 and 120 minutes)
+uniform_data = uniform.rvs(loc=0, scale=120, size=1000)
+
+# 2. Normal Distribution: Patient wait times with mean 30 mins and std dev 10 mins
+normal_data = np.random.normal(loc=30, scale=10, size=1000)
+
+# 3. Exponential Distribution: Time between patient arrivals, average 5 minutes
+exponential_data = np.random.exponential(scale=5, size=1000)
+
+# 4. Binomial Distribution: 100 tests with 70% chance of testing positive
+binomial_data = binom.rvs(n=100, p=0.7, size=1000)
+
+# 5. Poisson Distribution: Emergency calls per hour, average 5 calls
+poisson_data = poisson.rvs(mu=5, size=1000)
+
+# Plotting all distributions
+fig, axs = plt.subplots(3, 2, figsize=(14, 10))
+
+# Uniform Distribution
+axs[0, 0].hist(uniform_data, bins=30, color='skyblue', edgecolor='black')
+axs[0, 0].set_title('Uniform Distribution (Arrival Time between 8AM and 10AM)')
+axs[0, 0].set_xlabel('Time (minutes)')
+axs[0, 0].set_ylabel('Frequency')
+
+# Normal Distribution
+axs[0, 1].hist(normal_data, bins=30, color='lightgreen', edgecolor='black', density=True)
+xmin, xmax = axs[0, 1].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = norm.pdf(x, 30, 10)
+axs[0, 1].plot(x, p, 'k', linewidth=2)
+axs[0, 1].set_title('Normal Distribution (Patient Wait Times)')
+axs[0, 1].set_xlabel('Wait Time (minutes)')
+axs[0, 1].set_ylabel('Density')
+
+# Exponential Distribution
+axs[1, 0].hist(exponential_data, bins=30, color='orange', edgecolor='black', density=True)
+xmin, xmax = axs[1, 0].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = expon.pdf(x, scale=5)
+axs[1, 0].plot(x, p, 'k', linewidth=2)
+axs[1, 0].set_title('Exponential Distribution (Time between Arrivals)')
+axs[1, 0].set_xlabel('Time (minutes)')
+axs[1, 0].set_ylabel('Density')
+
+# Binomial Distribution
+axs[1, 1].hist(binomial_data, bins=30, color='lightcoral', edgecolor='black', density=True)
+axs[1, 1].set_title('Binomial Distribution (Test Results)')
+axs[1, 1].set_xlabel('Number of Positive Tests')
+axs[1, 1].set_ylabel('Frequency')
+
+# Poisson Distribution
+axs[2, 0].hist(poisson_data, bins=30, color='lightyellow', edgecolor='black', density=True)
+xmin, xmax = axs[2, 0].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = poisson.pmf(np.arange(0, 15), 5)
+axs[2, 0].plot(np.arange(0, 15), p, 'k', linewidth=2)
+axs[2, 0].set_title('Poisson Distribution (Emergency Calls per Hour)')
+axs[2, 0].set_xlabel('Number of Calls')
+axs[2, 0].set_ylabel('Probability')
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------
+
+
+
+
+
+Explanation of the Code:
+-----------------------------
+          Uniform Distribution: 
+              We use uniform.rvs() to generate 1000 random data points for patient 
+              arrival times uniformly distributed between 0 and 120 minutes (from 8 AM to 10 AM).
+          
+          Normal Distribution: 
+              We use np.random.normal() to generate 1000 random data points with a mean
+              of 30 minutes and a standard deviation of 10 minutes, modeling patient wait times.
+          
+          Exponential Distribution: 
+              We use np.random.exponential() to generate 1000 random data points with 
+              a mean of 5 minutes, representing the time between patient arrivals.
+          
+          Binomial Distribution: 
+              We use binom.rvs() to simulate 100 tests, each with a 70% probability of
+              testing positive, and repeat this 1000 times.
+          
+          Poisson Distribution:
+              We use poisson.rvs() to generate 1000 random data points, with an 
+              average of 5 emergency calls per hour.
+              
+
+
+Visualizations:
+------------------
+        Uniform Distribution:
+            Shows a flat histogram of patient arrival times.
+        
+        Normal Distribution: 
+            Shows a bell-shaped curve representing the wait times.
+        
+        Exponential Distribution:
+            Shows a skewed distribution indicating time intervals between arrivals.
+        
+        Binomial Distribution: 
+            Shows the distribution of the number of positive tests in 100 trials.
+        
+        Poisson Distribution: 
+            Shows the distribution of the number of emergency calls received per hour.
+        
+
+
+Conclusion:
+------------
+        This example helps visualize different probability distributions 
+        used in a hospital setting, providing insights into various aspects
+        like patient arrival times, wait times, test outcomes, and emergency calls.
+
+
+
+
+
+
+                              *******************
+                              CASE SCNNERIO - 2
+                              *******************
+                        
+
+
+Web Application Traffic and System Resource Management
+
+
+Scenario:
+-------------
+      Imagine a web application for an online shopping platform 
+      that experiences fluctuations in website traffic and system 
+      resource usage during peak and off-peak hours. 
+      
+      The website is designed to handle varying levels of user traffic, 
+      but during certain times, the system 
+      resources (like CPU and memory usage) may get overloaded. 
+      
+      This causes a performance drop and potential service interruptions.
+      
+
+
+Let’s model the following:
+-------------------------
+            Maximum Website Usage (Peak Traffic Hours): 
+            
+                Users are most active between 6 PM and 9 PM, and we observe 
+                that user traffic follows a Normal Distribution, with an average
+                number of users being 5000 and a standard deviation of 1000 users
+                during this time frame.
+                
+            
+            
+            System Resources Becoming Low: 
+            
+                The system resources (CPU and memory) tend to decrease gradually
+                as the number of users increases, but at certain times, resources 
+                fall below a threshold that affects performance. We can model this 
+                drop in resources using an Exponential Distribution, where the 
+                time between resource drops follows an exponential distribution
+                with a mean of 10 minutes.
+            
+            
+            
+            Usage Surges (Sudden Traffic Spikes): 
+            
+                At certain points during peak hours, the website experiences sudden
+                surges in traffic, where the number of users can increase sharply. 
+                These surges are modeled by a Poisson Distribution, with an average 
+                surge rate of 100 users per minute.
+            
+            
+            
+            Binomial Behavior in User Transactions: 
+                
+                Assume that a user browsing the website has a 70% chance of
+                making a purchase. We can simulate the number of purchases
+                made during peak traffic hours using a Binomial Distribution, with
+                5000 users and a 70% chance of making a purchase.
+            
+
+
+            Uniform Traffic Distribution: 
+            
+                The website has some periods of relatively even, constant traffic
+                in non-peak hours, modeled by a Uniform Distribution, where the traffic
+                rate is evenly distributed between 100 and 300 users per minute.
+                
+            
+
+
+
+Assumptions:
+------------------
+          Peak hours are between 6 PM and 9 PM.
+          
+          During peak hours, the system can handle a certain
+          level of traffic before resources start to drop.
+          
+          The system’s resource drop follows an exponential
+          distribution (with a mean of 10 minutes).
+          
+          Traffic surges are modeled by a Poisson distribution 
+          (with an average of 100 users per minute).
+          
+          User transactions (purchases) follow a binomial 
+          distribution (with 70% probability of making a purchase).
+          
+          During non-peak hours, the traffic is evenly
+          distributed between 100 and 300 users per minute.
+          
+          
+
+
+
+
+
+
+Python Code Implementation:
+------------------------------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm, poisson, binom, expon, uniform
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# 1. Normal Distribution: Maximum website usage (users during peak traffic)
+normal_traffic = np.random.normal(loc=5000, scale=1000, size=1000)
+
+# 2. Exponential Distribution: System resource drop (time between drops)
+exponential_resource_drop = np.random.exponential(scale=10, size=1000)
+
+# 3. Poisson Distribution: Sudden traffic surges (users per minute)
+poisson_traffic_surge = poisson.rvs(mu=100, size=1000)
+
+# 4. Binomial Distribution: User purchases (70% chance)
+binomial_purchases = binom.rvs(n=5000, p=0.7, size=1000)
+
+# 5. Uniform Distribution: Traffic during non-peak hours
+uniform_traffic = uniform.rvs(loc=100, scale=200, size=1000)
+
+# Plotting all distributions
+fig, axs = plt.subplots(3, 2, figsize=(14, 10))
+
+# Normal Distribution: Website traffic during peak hours
+axs[0, 0].hist(normal_traffic, bins=30, color='skyblue', edgecolor='black', density=True)
+xmin, xmax = axs[0, 0].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = norm.pdf(x, 5000, 1000)
+axs[0, 0].plot(x, p, 'k', linewidth=2)
+axs[0, 0].set_title('Normal Distribution (Peak Traffic Hours)')
+axs[0, 0].set_xlabel('Number of Users')
+axs[0, 0].set_ylabel('Density')
+
+# Exponential Distribution: Time between system resource drops
+axs[0, 1].hist(exponential_resource_drop, bins=30, color='orange', edgecolor='black', density=True)
+xmin, xmax = axs[0, 1].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = expon.pdf(x, scale=10)
+axs[0, 1].plot(x, p, 'k', linewidth=2)
+axs[0, 1].set_title('Exponential Distribution (System Resource Drops)')
+axs[0, 1].set_xlabel('Time Between Drops (minutes)')
+axs[0, 1].set_ylabel('Density')
+
+# Poisson Distribution: Sudden traffic surges (users per minute)
+axs[1, 0].hist(poisson_traffic_surge, bins=30, color='lightgreen', edgecolor='black', density=True)
+xmin, xmax = axs[1, 0].get_xlim()
+x = np.linspace(xmin, xmax, 100)
+p = poisson.pmf(np.arange(0, 15), 100)
+axs[1, 0].plot(np.arange(0, 15), p, 'k', linewidth=2)
+axs[1, 0].set_title('Poisson Distribution (Traffic Surges)')
+axs[1, 0].set_xlabel('Number of Users Surging')
+axs[1, 0].set_ylabel('Probability')
+
+# Binomial Distribution: User purchases (70% chance)
+axs[1, 1].hist(binomial_purchases, bins=30, color='lightcoral', edgecolor='black', density=True)
+axs[1, 1].set_title('Binomial Distribution (User Purchases)')
+axs[1, 1].set_xlabel('Number of Purchases')
+axs[1, 1].set_ylabel('Frequency')
+
+# Uniform Distribution: Traffic during non-peak hours
+axs[2, 0].hist(uniform_traffic, bins=30, color='lightyellow', edgecolor='black', density=True)
+axs[2, 0].set_title('Uniform Distribution (Non-Peak Traffic)')
+axs[2, 0].set_xlabel('Number of Users')
+axs[2, 0].set_ylabel('Density')
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+------------------------------------------------------------------------
+
+
+Explanation of the Code:
+----------------------------
+      Normal Distribution (Peak Traffic Hours):
+          We simulate the number of users during peak hours (6 PM to 9 PM) 
+          using np.random.normal(), with a mean of 5000 and a standard deviation of 1000.
+      
+      Exponential Distribution (System Resource Drops): 
+          We simulate the time between system resource 
+          drops (e.g., CPU or memory usage going low) using np.random.exponential(), with 
+          a mean of 10 minutes.
+      
+      Poisson Distribution (Sudden Traffic Surges): 
+          We simulate sudden surges in traffic using poisson.rvs() with a mean
+          of 100 users per minute during peak hours.
+      
+      Binomial Distribution (User Purchases): 
+          We simulate user purchases using binom.rvs() with 5000 users, where
+          each user has a 70% chance of making a purchase.
+      
+      Uniform Distribution (Non-Peak Traffic):
+          We simulate traffic during non-peak hours using uniform.rvs(), with
+          traffic between 100 and 300 users per minute.
+          
+
+
+Visualizations:
+-------------------
+          Normal Distribution: 
+          Shows the distribution of users during peak hours, with the 
+          highest concentration around 5000 users.
+          
+          Exponential Distribution:
+          Shows the distribution of time intervals between system 
+          esource drops, with shorter intervals occurring more frequently.
+          
+          Poisson Distribution: 
+          Shows the distribution of sudden traffic surges during peak
+          hours, with the number of surges typically ranging between 50 and 150 users.
+          
+          Binomial Distribution: 
+          Shows the distribution of the number of purchases made
+          by users, with most users making purchases.
+          
+          Uniform Distribution:
+          Shows the distribution of traffic during non-peak hours, with
+          traffic evenly distributed between 100 and 300 users per minute.
+          
+
+
+Conclusion:
+----------------
+      This case scenario simulates the varying levels of traffic on 
+      a website and the resulting impact on system resources.
+      The models and distributions help us understand how to manage 
+      and predict website usage, system resource consumption, user 
+      behavior (purchases), and traffic spikes during different periods.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Percentiles and Moments
+==========================
+
+in a data set , what is the point at which X% of the values are
+less than that value?
+
+Example : income distributions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A Crash Course in matplotlib
+===============================
+
+
+
+
+Draw a line graph
+-----------------------------
+%matplotlib inline
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(-3, 3, 0.01)
+
+plt.plot(x, norm.pdf(x))
+plt.show()
+------------------------------
+
+
+
+
+
+
+Mutiple Plots on One Graph
+-----------------------------
+plt.plot(x, norm.pdf(x))
+plt.plot(x, norm.pdf(x, 1.0, 0.5))
+plt.plot(x, norm.pdf(x, 2.0, 0.5))
+plt.show()
+------------------------------
+
+
+
+
+
+
+Save it to a File
+-----------------------------
+plt.plot(x, norm.pdf(x))
+plt.plot(x, norm.pdf(x, 1.0, 0.5))
+plt.savefig('sanjeev.png', format='png')
+------------------------------
+
+
+
+
+
+
+
+
+
+
+Adjust the Axes
+-----------------------------
+axes = plt.axes()
+axes.set_xlim([-5, 5])
+axes.set_ylim([0, 1.0])
+
+axes.set_xticks([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+axes.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+
+plt.plot(x, norm.pdf(x))
+plt.plot(x, norm.pdf(x, 1.0, 0.5))
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Add a Grid
+-----------------------------
+axes = plt.axes()
+axes.set_xlim([-5, 5])
+axes.set_ylim([0, 1.0])
+axes.set_xticks([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+axes.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+
+axes.grid()
+
+plt.plot(x, norm.pdf(x))
+plt.plot(x, norm.pdf(x, 1.0, 0.5))
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+Change Line Types and Colors
+-----------------------------
+axes = plt.axes()
+axes.set_xlim([-5, 5])
+axes.set_ylim([0, 1.0])
+axes.set_xticks([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+axes.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+
+axes.grid()
+
+plt.plot(x, norm.pdf(x), 'b-')
+plt.plot(x, norm.pdf(x, 1.0, 0.5), 'r:')
+plt.plot(x, norm.pdf(x, -1.0, 0.6), 'g*:')
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Labeling Axes and Adding a Legend
+-----------------------------
+axes = plt.axes()
+axes.set_xlim([-5, 5])
+axes.set_ylim([0, 1.0])
+axes.set_xticks([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+axes.set_yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+
+axes.grid()
+
+plt.xlabel('Greebles')
+plt.ylabel('Probability')
+
+plt.plot(x, norm.pdf(x), 'b-')
+plt.plot(x, norm.pdf(x, 1.0, 0.5), 'r:')
+plt.legend(['Sneetches', 'Gacks'], loc=1)
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XKCD Style :)
+------------------------------
+plt.xkcd()
+
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+plt.xticks([])
+plt.yticks([])
+ax.set_ylim([-30, 10])
+
+data = np.ones(100)
+data[70:] -= np.arange(30)
+
+plt.annotate(
+    'THE DAY I REALIZED\nI COULD COOK BACON\nWHENEVER I WANTED',
+    xy=(70, 1), arrowprops=dict(arrowstyle='->'), xytext=(15, -10))
+
+plt.plot(data)
+
+plt.xlabel('time')
+plt.ylabel('my overall health')
+------------------------------
+
+
+
+
+
+
+
+
+Pie Chart
+------------------------------
+# Remove XKCD mode:
+plt.rcdefaults()
+
+values = [12, 55, 4, 32, 14]
+colors = ['r', 'g', 'b', 'c', 'm']
+explode = [0, 0, 0.2, 0, 0]
+labels = ['India', 'United States', 'Russia', 'China', 'Europe']
+plt.pie(values, colors= colors, labels=labels, explode = explode)
+plt.title('Student Locations')
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+Bar Chart
+------------------------------
+values = [12, 55, 4, 32, 14]
+colors = ['r', 'g', 'b', 'c', 'm']
+plt.bar(range(0,5), values, color= colors)
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+Scatter Plot
+------------------------------
+from pylab import randn
+
+X = randn(500)
+Y = randn(500)
+plt.scatter(X,Y)
+plt.show()
+------------------------------
+
+
+------------------------------Scatter Plot 2
+from pylab import randn
+import matplotlib.pyplot as plt
+
+# Generate random data
+X = randn(50)
+Y = randn(50)
+
+# Assign colors based on a condition
+colors = ['r' if x > 0 else 'g' for x in X]  # Red for positive X, Green for negative X
+
+# Create the scatter plot
+plt.scatter(X, Y, c=colors)
+plt.title("Scatter Plot with Two Colors")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.grid(True)
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+Histogram
+------------------------------
+incomes = np.random.normal(27000, 15000, 10000)
+plt.hist(incomes, 50)
+plt.show()
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Box & Whisker Plot
+------------------------------
+uniformSkewed = np.random.rand(100) * 100 - 40
+high_outliers = np.random.rand(10) * 50 + 100
+low_outliers = np.random.rand(10) * -50 - 100
+data = np.concatenate((uniformSkewed, high_outliers, low_outliers))
+plt.boxplot(data)
+plt.show()
+------------------------------
+          Useful for visualizing the spread & skew of data.
+          
+          The red line represents the median of the data, 
+          and the box represents the bounds of the 1st 
+          and 3rd quartiles.
+          
+          So, half of the data exists within the box.
+          
+          The dotted-line "whiskers" indicate the range of 
+          the data - except for outliers, which are plotted 
+          outside the whiskers. Outliers are 1.5X or more 
+          the interquartile range.
+          
+          This example below creates uniformly distributed 
+          random numbers between -40 and 60, plus a few 
+          outliers above 100 and below -100:
+          
+
+
+
+
+
+
+
+
+Activity
+------------------------------
+Try creating a scatter plot and histogram
+representing random
+data on age vs. time spent watching TV. Label the axes.
+
+
+------------------------------
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate random data
+np.random.seed(42)  # For reproducibility
+ages = np.random.randint(10, 70, 100)  # Ages between 10 and 70
+tv_time = np.random.normal(2, 1, 100) * ages / 50  # TV time proportional to age (hours/day)
+
+# Create a figure with two subplots
+fig, (scatter_ax, hist_ax) = plt.subplots(1, 2, figsize=(12, 5), gridspec_kw={'width_ratios': [3, 1]})
+
+# Scatter plot
+scatter_ax.scatter(ages, tv_time, c='b', alpha=0.7, edgecolors='k', s=50)
+scatter_ax.set_title("Scatter Plot: Age vs TV Time")
+scatter_ax.set_xlabel("Age (years)")
+scatter_ax.set_ylabel("TV Time (hours/day)")
+scatter_ax.grid(True)
+
+# Histogram for TV Time
+hist_ax.hist(tv_time, bins=10, color='g', alpha=0.7, edgecolor='black')
+hist_ax.set_title("Histogram: Distribution of TV Time")
+hist_ax.set_xlabel("TV Time (hours/day)")
+hist_ax.set_ylabel("Frequency")
+hist_ax.grid(True)
+
+# Show the plots
+plt.tight_layout()
+plt.show()
+------------------------------
+
+Explanation:
+--------------
+    Random Data:
+          Ages: Uniformly distributed between 10 and 70.
+          TV Time: Created with a proportional 
+          relationship to age and some added noise.
+    
+    
+    Scatter Plot:
+          Visualizes the relationship between age and
+          TV time.
+          Includes axis labels, grid, and markers with 
+          slight transparency for clarity.
+    
+    
+    
+    Histogram:
+          Displays the distribution of TV time.
+          The histogram uses 10 bins and has 
+          distinct edge coloring.
+          
+    
+    
+    Figure Layout:
+          Used gridspec_kw to adjust subplot proportions.
+          Ensured both plots are aligned neatly
+          with tight_layout.
+          
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+Advanced Visualization with Seaborn
+=====================================
+
+Seaborn is a visualization library that sits on 
+top of matplotlib, making it nicer to look at and 
+adding some extra capabilities too.
+
+
+
+Comparison: Matplotlib vs Seaborn
+------------------------------------------
+          Purpose
+          -----------
+                Matplotlib: 
+                A foundational library for creating static, animated, and
+                interactive visualizations. It provides complete control for designing
+                custom visualizations from scratch.
+                
+                
+                Seaborn: 
+                Built on top of Matplotlib to simplify the creation of clean,
+                attractive, and statistically-oriented plots.
+          
+          
+          Ease of Use
+          -----------
+                Matplotlib: 
+                Requires more code and manual customization to create
+                polished visuals. Best suited for users who need granular
+                control over every detail of the plot.
+                
+                Seaborn: 
+                Simplifies common tasks with concise syntax and polished
+                defaults, making it easier for beginners.
+          
+          
+          Types of Plots
+          -----------
+                Matplotlib: Supports basic plots like line, bar, scatter,
+                and histogram, as well as custom and niche visualizations.
+                
+                
+                Seaborn: Extends Matplotlib by offering advanced statistical
+                plots, such as heatmaps, violin plots, pair plots, and 
+                regression plots.
+          
+          
+          Aesthetics
+          -----------
+                Matplotlib:
+                Default visuals are minimal and require manual effort 
+                to make them look professional.
+                
+                
+                Seaborn: 
+                Comes with built-in themes and color
+                palettes (darkgrid, whitegrid, etc.) that make plots visually
+                appealing out of the box.
+                
+          
+          Customization
+          -----------
+                Matplotlib: 
+                Provides complete control over every
+                aspect of the plot, making it ideal for creating
+                highly customized visualizations.
+                
+                Seaborn: 
+                Easier to customize but offers less granular 
+                control compared to Matplotlib.
+                
+          
+          
+          
+          Integration with Pandas
+          ---------------------------------
+                Matplotlib: 
+                Works well with Pandas but often requires explicit
+                data extraction for plotting.
+                
+                Seaborn:
+                Directly integrates with Pandas, making it seamless 
+                for visualizing data stored in DataFrames.
+          
+          
+          
+          Statistical Tools
+          ---------------------------------
+                Matplotlib: 
+                Limited built-in statistical tools; external libraries 
+                are needed for advanced analysis.
+                
+                
+                Seaborn: 
+                Includes tools for regression analysis, confidence intervals, 
+                and distribution visualizations.
+                
+          
+          
+          Learning Curve
+          ----------------------
+                Matplotlib: 
+                Has a steeper learning curve, particularly
+                for complex visualizations.
+                
+                Seaborn: 
+                Easier to learn, especially for beginners 
+                focused on exploratory data analysis.
+                
+          
+          Performance
+          ----------------------
+                Matplotlib:
+                More efficient for large datasets due to 
+                its low-level control.
+                
+                Seaborn: 
+                Slightly slower as it adds abstraction 
+                over Matplotlib.
+                
+          
+          
+          When to Use
+          -----------
+          
+                Matplotlib: 
+                Best for highly customized, detailed, and 
+                unique visualizations.
+                
+                Seaborn: 
+                Ideal for quick, polished statistical plots
+                and exploratory data analysis.
+                
+
+
+
+
+Let's start by loading up a real dataset on 2019 model-year 
+vehicles, and plotting a histogram just using matplotlib to 
+see the distribution by number of gears.
+
+
+
+-------------------------------------------------------------
+%matplotlib inline
+
+import pandas as pd
+
+df = pd.read_csv("http://media.sundog-soft.com/SelfDriving/FuelEfficiency.csv")
+
+gear_counts = df['# Gears'].value_counts()
+
+gear_counts.plot(kind='bar')
+
+-------------------------------------------------------------
+
+
+
+
+
+
+
+We can load up Seaborn, and just call set() on it to change
+matplotlib's default settings to something more visually pleasing.
+-------------------------------------------------------------
+import seaborn as sns
+sns.set()
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Now if we do the same plot command, it's a little more modern looking.
+Matplotlib is based on Matplot, and its visualization defaults are 
+frankly showing their age.
+-------------------------------------------------------------
+gear_counts.plot(kind='bar')
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Let's take a closer look at the data we're dealing with.
+-------------------------------------------------------------
+df.head()
+-------------------------------------------------------------
+
+Mfr Name	Carline	Eng Displ	Cylinders	Transmission	CityMPG	HwyMPG	CombMPG	# Gears
+0	aston martin	Vantage V8	4.0	8	Auto(S8)	18	25	21	8
+1	Volkswagen Group of	Chiron	8.0	16	Auto(AM-S7)	9	14	11	7
+2	General Motors	CORVETTE	6.2	8	Auto(S8)	12	20	15	8
+3	General Motors	CORVETTE	6.2	8	Auto(S8)	15	25	18	8
+4	General Motors	CORVETTE	6.2	8	Auto(S8)	14	23	17	8
+
+
+
+
+
+
+
+
+
+Seaborn includes many types of plots that matplotlib doens't offer. 
+
+For example, "distplot" can be used to plot a histogram together
+with a smooth distribution of that histogram overlaid on it. 
+Let's plot the distribution of MPG values on the vehicles 
+in this database as an example:
+-------------------------------------------------------------
+sns.distplot(df['CombMPG'])
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Something you encounter pretty often is a "pair plot" from Seaborn. 
+This lets you visualize plots of every combination of various
+attributes together, so you can look for interesting patterns 
+between features.
+
+
+As an example, let's classify cars by how many cylinders are in 
+their engines, and look for relationships between cylinders, city 
+MPG rating, Highway MPG rating, and combined MPG rating.
+-------------------------------------------------------------
+df2 = df[['Cylinders', 'CityMPG', 'HwyMPG', 'CombMPG']]
+df2.head()
+-------------------------------------------------------------
+
+Cylinders	CityMPG	HwyMPG	CombMPG
+0	8	18	25	21
+1	16	9	14	11
+2	8	12	20	15
+3	8	15	25	18
+4	8	14	23	17
+
+
+
+
+
+
+
+
+
+
+By studying the results above, you can see there is a 
+relationship between number of cylinders and MPG, but MPG 
+for 4-cylinder vehicles ranges really widely. 
+There also appears to be a good linear relationship between the
+different ways of measuring MPG values, until you get into the 
+higher MPG ratings.
+
+Seaborn 1.9 also includes "scatterplot", which is exactly what
+it sounds like. It plots individual data points across two axes 
+of your choosing, so you can see how your data is distributed
+across those dimensions.
+-------------------------------------------------------------
+sns.scatterplot(x="Eng Displ", y="CombMPG", data=df)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Seaborn also offers a "jointplot", which combines a 
+scatterplot with histograms on both axes. This lets you
+visualize both the individual data points and the distribution
+across both dimensions at the same time.
+-------------------------------------------------------------
+sns.jointplot(x="Eng Displ", y="CombMPG", data=df)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+The "lmplot" is a scatterplot, but with a linear regression 
+line computed and overlaid onto the data.
+-------------------------------------------------------------
+sns.lmplot(x="Eng Displ", y="CombMPG", data=df)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Next, let's look at a "box plot." This is what's called a "box and whiskers" plot,
+which is useful for visualizing typical values for a given category without getting
+distracted by outliers. Each box represents the range between the first and third 
+quartiles of the data, with a line representing the median value. The "whiskers" 
+that extend from the box represent the spread of the remainder of the data, apart
+from clear outliers that are plotted as individual points outside of the whiskers.
+
+As an example, let's look at box plots for each vehicle manufacturer, visualizing 
+the miles-per-gallon ratings across the vehicles they produce. This lets us look
+at the spread of MPG ratings across all the vehicles each manufacturer offers.
+
+There are a lot of manufacturers, so to make the resulting graph readable we'll
+increase Seaborn's default figure size, and also use set_xticklabels to rotate
+the labels 45 degrees.
+-------------------------------------------------------------
+sns.set(rc={'figure.figsize':(15,5)})
+ax=sns.boxplot(x='Mfr Name', y='CombMPG', data=df)
+ax.set_xticklabels(ax.get_xticklabels(),rotation=45)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Another way to visualize the same data is the "swarm plot." Instead of 
+boxes and whiskers, it plots each individual data point - but does so in
+such way that groups them together based on their distribution. It makes
+more sense when you look at it:
+-------------------------------------------------------------
+ax=sns.swarmplot(x='Mfr Name', y='CombMPG', data=df)
+ax.set_xticklabels(ax.get_xticklabels(),rotation=45)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Another tool is the "count plot." This is basically the same thing as a 
+histogram, but for categorical data. It lets you count up how many times
+each given category on the X axis occurs in your data, and plot it. So 
+for example, we can see that General Motors offers more vehicle models 
+than anyone else, with BMW not far behind.
+-------------------------------------------------------------
+ax=sns.countplot(x='Mfr Name', data=df)
+ax.set_xticklabels(ax.get_xticklabels(),rotation=45)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+Finally, let's look at a heat-map in Seaborn. A heat map allows you to plot 
+tabular, 2D data of some sort, with colors representing the individual 
+values in each cell of the 2D table.
+
+In this example, we'll create a pivot table from our original dataframe,
+to create a 2D table that contains the average MPG ratings for every combination
+of number of cylinders and engine displacement.
+
+The resulting heatmap shows all of the engine displacement values along 
+the X axis, and all of the cylinder values along the Y axis. For each cell
+of the table, the actual average MPG rating for that combination of cylinders
+and engine displacement is represented not as a number, but as a color that 
+ranges from dark for small values, and light for larger values.
+
+And, this does allow you visualize a clear trend where things get 
+progressively darker as we move from the top-left of the graph to the bottom-right.
+Which makes sense; higher MPG ratings are associated with lower numbers of cylinders,
+and lower engine displacment values. By the time we get to an 8-liter 16-cylinder
+engine, the average MPG is at its worst of about 12, represented by the color black.
+
+This particular graph has a lot of missing data, but the heatmap deals with that
+gracefully. A 3-cylinder 8-liter engine simply does not exist!
+-------------------------------------------------------------
+df2 = df.pivot_table(index='Cylinders', columns='Eng Displ', values='CombMPG', aggfunc='mean')
+sns.heatmap(df2)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Exercise
+Explore the relationship between the number of gears a car has, and its combined
+MPG rating. Visualize these two dimensions using a scatter plot, lmplot, jointplot, 
+boxplot, and swarmplot. What conclusions can you draw?
+-------------------------------------------------------------
+
+-------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------My solution is below - no peeking ahead of time!
+sns.scatterplot(x='# Gears', y="CombMPG", data=df)
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Covariance and Correlation
+==============================
+Measures how two variables vary in term from their means
+
+
+
+Measuring covariance
+--------------------
+      think of the data sets for the two variables as high dimension vectors
+      
+      convert these to vectors of variances from the mean
+      
+      take the dot product(coine of the angle between them) of the two vectors
+      
+      divide by sample size
+
+
+
+
+
+interpreating covariance is hard
+---------------------------------
+        we know a small covariance , close to 0 , means there is not much 
+        crelaion between the two variables.
+        
+        and large covariences - that is far frm 0 (could be negative for
+        inverse relationships) mean there is a corelation.
+        
+        But how large is "large"?
+        
+        Just divide the covariance by the standard deviation of both 
+        variables, and that normalize things.
+
+        corelation -1  = perfect inverse corelation
+        corelation  0  = no corelation
+        corelation +1  = perfect  corelation
+
+
+
+
+
+
+
+NOTE
+--------
+          co relation does not imply causation.
+          
+          ony a controlled, randomized experiment can give
+          you insoghts on causation.
+          
+          use corelation to decide what experiments to conduct.
+          
+          
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Conditional Probability
+=========================
+
+      eg: if ram bought a product "x" from amazon 
+      then same product "x" ll be recomednded for sita to...
+      same event "x" had occured previously
+      
+
+
+      if i have a two events , that depend on each other , whats 
+      the probablty that both will occur?
+      
+      
+      Noation: P(A,B) is th probabality of A and B occuring
+      
+      P(B|A) : Pof B that A has occured
+      
+      P (B | A) = P (A,B) / P(A) 
+      
+
+
+example
+---------
+If i give my students two tests: 60% of my students passed 
+both tests, but the first test was easier - 80% passed that 
+one.
+What percentage of students who pased the first test also 
+passed the second?
+
+            soln
+            
+            A - passing a first test
+            
+            B - passing a second test
+            
+            So P (B | A) - the probablity of B given A = ?
+            
+            P (B | A ) = P (A, B) / P(A) = 0.6 / 0.8 = 0.75
+            
+            
+            75 % of students who passed the first test also 
+            passed the second test .
+            
+            
+
+
+
+
+Real-World Scenarios:
+-------------------------
+          Medical diagnostics (probability of having a disease
+          given a positive test result).
+          
+          Weather forecasting (probability of rain given cloudy skies).
+          
+          Machine learning (classification and decision-making).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exercise Solution Conditional Probability of Purchase by Age
+================================================================
+
+
+
+
+EXAMPLE 1. Online Shopping
+-----------------------------
+Scenario: Predicting Purchase Likelihood
+
+Event A: A customer makes a purchase.
+Event B: A customer clicks on a product advertisement.
+
+Conditional probability P(A∣B) helps determine the likelihood
+that a customer will purchase a product given that they 
+clicked on an ad. 
+
+If 100 customers click on the ad and 20 of 
+them purchase the product:
+
+𝑃(𝐴∣𝐵)= Number of purchases / Number of ad clicks
+      =20/100
+      =0.2
+      ​
+This insight allows businesses to optimize ad
+targeting by focusing on customers with higher 
+probabilities of making purchases.
+
+
+
+
+
+EXAMPLE  2. Movie Recommendations (OTT Platforms)
+-----------------------------------------------
+        Scenario: Predicting Genre Preferences
+
+        Event A: A user watches a science fiction movie.
+        Event B: A user likes movies rated 4 stars or higher.
+        
+        OTT platforms like Netflix use 𝑃(𝐴∣𝐵) to predict
+        genre preferences. For example:
+        
+        If 60% of users who rate movies 4+ stars also
+        watch science fiction movies, then:
+        
+        P(A∣B)=0.6.
+        
+        By understanding P(A∣B), the platform can 
+        recommend science fiction movies to users who 
+        often give high ratings to movies they enjoy.
+        
+
+
+
+
+
+
+
+
+
+
+
+
+              ++++++++++++++++++++++++++++++++++++++++++++
+              Conditional Probability Activity & Exercise
+              ++++++++++++++++++++++++++++++++++++++++++++
+
+
+Below is some code to create some fake data on how much 
+stuff people purchase given their age range.
+
+It generates 100,000 random "people" and randomly assigns
+them as being in their(age) 20's, 30's, 40's, 50's, 60's, or 70's.
+
+It then assigns a lower probability for young people to 
+buy stuff.
+
+In the end, we have two Python dictionaries:
+
+"totals" contains the total number of peoplein each age group. 
+
+"purchases" contains the total number of things purchased
+by people in each age group.
+
+The grand total of purchases is in totalPurchases, and 
+
+we know the total number of people is 100,000.
+
+Let's run it and have a look:
+
+---------------------------------------------------
+from numpy import random
+random.seed(0)
+
+totals = {20:0, 30:0, 40:0, 50:0, 60:0, 70:0}
+purchases = {20:0, 30:0, 40:0, 50:0, 60:0, 70:0}
+totalPurchases = 0
+for _ in range(100000):
+    ageDecade = random.choice([20, 30, 40, 50, 60, 70])
+    purchaseProbability = float(ageDecade) / 100.0
+    totals[ageDecade] += 1
+    if (random.random() < purchaseProbability):
+        totalPurchases += 1
+        purchases[ageDecade] += 1
+
+print("totals -- is : ",totals)
+print("purchases -- is : ",purchases)
+print("totalPurchases -- is : ",totalPurchases)
+---------------------------------------------------
+totals -- is :  {20: 16576, 30: 16619, 40: 16632, 50: 16805, 60: 16664, 70: 16704}
+purchases -- is :  {20: 3392, 30: 4974, 40: 6670, 50: 8319, 60: 9944, 70: 11713}
+totalPurchases -- is :  45012
+
+
+
+
+
+
+Let's play with conditional probability.
+
+First let's compute P(E|F), 
+where E is "purchase" and F is "you're in your 30's". 
+
+The probability of someone in their 30's buying something 
+is just the percentage of how many 30-year-olds bought something:
+
+---------------------------------------------------
+PEF = float(purchases[30]) / float(totals[30])
+print('P(purchase | 30s): ' + str(PEF))
+---------------------------------------------------
+      P(purchase | 30s): 0.29929598652145134
+
+
+
+
+
+
+P(F) is just the probability of being 30 in this data set:
+---------------------------------------------------
+PF = float(totals[30]) / 100000.0
+print("P(30's): " +  str(PF))
+---------------------------------------------------
+P(30's): 0.16619
+
+
+
+
+
+
+
+And P(E) is the overall probability of
+buying something, regardless of your age:
+---------------------------------------------------
+PE = float(totalPurchases) / 100000.0
+print("P(Purchase):" + str(PE))
+---------------------------------------------------
+          P(Purchase):0.45012
+
+
+
+
+
+
+If E and F were independent, 
+then we would expect P(E | F) to be about the same as P(E). 
+
+But they're not; P(E) is 0.45, and P(E|F) is 0.3. So, that tells
+us that E and F are dependent (which we know they are in this example.)
+
+
+P(E,F) is different from P(E|F).
+P(E,F) would be the probability of both being in 
+your 30's and buying something, out of the
+total population - not just the population of people in their 30's:
+
+---------------------------------------------------
+print("P(30's, Purchase)" + str(float(purchases[30]) / 100000.0))
+---------------------------------------------------
+            P(30's, Purchase)0.04974
+
+
+
+
+
+
+Let's also compute the product of P(E) and P(F), P(E)P(F):
+---------------------------------------------------
+print("P(30's)P(Purchase)" + str(PE * PF))
+---------------------------------------------------
+          P(30's)P(Purchase)0.07480544280000001
+
+
+
+
+
+
+Something you may learn in stats 
+is that P(E,F) = P(E)P(F), but this
+
+assumes E and F are independent. We've found here that P(E,F) is
+about 0.05, while P(E)P(F) is about 0.075.
+
+So when E and F are dependent - and we have a conditional probability 
+going on - we can't just say that P(E,F) = P(E)P(F).
+
+We can also check that P(E|F) = P(E,F)/P(F), which is the 
+relationship we showed in the slides - and sure enough, it is:
+
+---------------------------------------------------
+print((purchases[30] / 100000.0) / PF)
+---------------------------------------------------
+                0.29929598652145134
+
+
+
+
+
+
+Your Assignment
+-----------------
+
+Modify the code above such that the purchase probability 
+does NOT vary with age, making E and F actually independent.
+
+Then, confirm that P(E|F) is about the same as P(E), showing 
+that the conditional probability of purchase for a given age
+is not any different than the a-priori probability of purchase
+regardless of age.
+
+---------------------------------------------------
+Solution
+---------------------------------------------------
+
+
+First we'll modify the code to have some fixed
+purchase probability regardless of age, say 40%:
+
+--------------------------------------------------
+from numpy import random
+random.seed(0)
+
+totals = {20:0, 30:0, 40:0, 50:0, 60:0, 70:0}
+purchases = {20:0, 30:0, 40:0, 50:0, 60:0, 70:0}
+totalPurchases = 0
+for _ in range(100000):
+    ageDecade = random.choice([20, 30, 40, 50, 60, 70])
+    purchaseProbability = 0.4
+    totals[ageDecade] += 1
+    if (random.random() < purchaseProbability):
+        totalPurchases += 1
+        purchases[ageDecade] += 1
+---------------------------------------------------
+
+
+
+
+Next we will compute P(E|F) for some age group, let's
+pick 30 year olds again:
+--------------------------------------------------
+PEF = float(purchases[30]) / float(totals[30])
+print("P(purchase | 30s): " + str(PEF))
+---------------------------------------------------
+        P(purchase | 30s): 0.3987604549010169
+
+
+
+
+
+
+
+Now we'll compute P(E)
+--------------------------------------------------
+PE = float(totalPurchases) / 100000.0
+print("P(Purchase):" + str(PE))
+---------------------------------------------------
+        P(Purchase):0.4003
+
+
+
+P(E|F) is pretty darn close to P(E), so we
+can say that E and F are likely indepedent variables.
+
+
+
+--------------------------------------------------
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              ***********************************************************
+              Conditional Probability with Nepali Movie Recommendations
+              ***********************************************************
+
+
+Objective:
+    Use Python to compute and visualize conditional 
+    probabilities for recommending the movie "Sarangi" 
+    to new users based on the watching habits of others.
+
+
+Scenario Setup:
+      Participants:
+            Ram and Sita: Users who have already watched the movie "Sarangi."
+            Maya, Nisha, and Divya: Users to whom the recommendation will be made.
+      
+      
+      Events:
+            A: User watches the movie "Sarangi."
+            B: Ram and Sita have previously watched "Sarangi."
+      
+      
+      Task:
+            Compute the probability P(A∣B): Probability of a new user 
+            watching "Sarangi," given Ram and Sita's actions.
+            
+            Visualize the results with bar graphs.
+            
+
+
+Python Code
+---------------------------------------------------
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data: Watching history
+users = ["Maya", "Nisha", "Divya"]
+ram_sita_watch = True  # Ram and Sita watched the movie
+watched_probabilities = [0.7, 0.5, 0.3]  # Probabilities of Maya, Nisha, and Divya watching "Sarangi" given Ram & Sita watched
+
+# Compute Conditional Probabilities
+def compute_conditional_probability(base_prob, prior_prob=1):
+    """Compute conditional probability given base and prior probabilities."""
+    return base_prob * prior_prob
+
+# Calculate probabilities for each user
+conditional_probs = [compute_conditional_probability(prob) for prob in watched_probabilities]
+
+# Visualize the Results
+x = np.arange(len(users))  # Bar positions
+bar_width = 0.4
+
+plt.figure(figsize=(8, 6))
+plt.bar(x, watched_probabilities, width=bar_width, label="Base Probability (P(A))", color='skyblue', alpha=0.7)
+plt.bar(x + bar_width, conditional_probs, width=bar_width, label="Conditional Probability (P(A|B))", color='orange', alpha=0.7)
+
+# Add labels and titles
+plt.xticks(x + bar_width / 2, users)
+plt.xlabel("Users")
+plt.ylabel("Probability")
+plt.title("Conditional Probability of Watching 'Sarangi'")
+plt.legend()
+
+# Show the graph
+plt.tight_layout()
+plt.show()
+
+# Print Probabilities
+for user, base_prob, cond_prob in zip(users, watched_probabilities, conditional_probs):
+    print(f"{user}: Base Probability = {base_prob}, Conditional Probability = {cond_prob}")
+---------------------------------------------------
+
+            Maya: Base Probability = 0.7, Conditional Probability = 0.7
+            Nisha: Base Probability = 0.5, Conditional Probability = 0.5
+            Divya: Base Probability = 0.3, Conditional Probability = 0.3
+            
+
+Case Analysis:
+      Inputs:
+            Base probabilities: Maya (0.7), Nisha (0.5), Divya (0.3) represent 
+            their general likelihood of watching the movie.
+            
+            Prior Event (Ram and Sita watched): Assumed probability = 1 (certainty).
+      
+      
+      Outputs:
+              Conditional probabilities for Maya, Nisha, and Divya 
+              are computed and visualized.
+              
+              A bar chart compares the base and conditional
+              probabilities.
+              
+      
+      Interpretation:
+            If Ram and Sita's habits influence others, conditional 
+            probabilities help predict if Maya, Nisha, or Divya
+            will watch "Sarangi."
+            
+
+
+
+Questions for Students:
+------------------------
+      How does changing Ram and Sita's influence (prior probability) 
+      affect conditional probabilities?
+      
+      What insights can be drawn if conditional probabilities
+      for all users are similar?
+      
+      How can this model improve recommendations for other Nepali movies?
+      
+---------------------------------------------------------
+
+
+
+1. How does changing Ram and Sita's influence (prior probability) 
+affect conditional probabilities?
+
+    The prior probability (in this case, Ram and Sita's 
+    likelihood of watching the movie) acts as a multiplier
+    in the computation of conditional probabilities.
+    
+          Specifically:
+          
+                P(A∣B)=P(A∩B)/P(B).
+          
+            If P(B) (Ram and Sita's influence) changes:
+    
+                Higher P(B): Increases the likelihood of other
+                users (Maya, Nisha, Divya) watching "Sarangi." The 
+                conditional probabilities P(A∣B) for each user
+                will increase.
+                
+                Lower P(B): Reduces the influence, decreasing P(A∣B).
+                If P(B) is very low (close to 0), the conditional
+                probabilities approach zero as well, indicating minimal
+                influence.
+                
+    This demonstrates that Ram and Sita's preferences significantly
+    impact the model's predictions for others.
+
+
+
+
+
+
+
+2. What insights can be drawn if conditional probabilities
+for all users are similar?
+      
+      If P(A∣B) is similar for Maya, Nisha, and Divya:
+            
+            Minimal Variance in Influence:
+                Indicates that Ram and Sita’s habits affect all users
+                equally, suggesting uniform influence across the group.
+            
+            
+            Homogeneous User Preferences:
+                Users (Maya, Nisha, and Divya) likely share similar
+                preferences or behaviors when selecting movies.
+            
+            
+            Group-Based Recommendation:
+                Suggests that the system could use a generalized
+                recommendation strategy rather than personalized 
+                ones for similar users.
+      
+      
+      This could imply a cultural or social trend, where
+      movie-watching decisions are less individualized 
+      and more community-driven.
+
+
+
+
+
+3. How can this model improve recommendations for other Nepali movies?
+
+      
+      This model can be extended to improve recommendations
+      by incorporating additional factors:
+      
+            a) Behavioral Patterns:
+                Track how other influential users (besides Ram and Sita) 
+                interact with Nepali movies.
+                
+                Analyze trends to identify key predictors
+                (e.g., genre, cast, director)
+                that  affect viewership.
+            
+            
+            b) Dynamic Recommendations:
+                Use real-time data to update conditional probabilities 
+                as new users watch movies. For example, if Nisha ends up 
+                watching "Sarangi," her influence on Divya's likelihood 
+                could be recalculated.
+            
+            
+            c) Content-Based Filtering:
+                  Expand the model to include features like genres, 
+                  ratings, or reviews. If "Sarangi" has 
+                  elements (e.g., music, emotional appeal) similar 
+                  to other Nepali movies, those movies can be recommended 
+                  to users with a higher probability.
+                  
+            
+            d) Collaborative Filtering:
+                  Leverage the habits of similar
+                  users (e.g., if Maya and Nisha both watched "Sarangi,"
+                  what else do they have in common?) to suggest
+                  other movies.
+            
+            
+            e) Social Influence Analysis:
+                  Incorporate a network effect model where the 
+                  influence of one viewer propagates to their 
+                  connections, simulating social sharing behaviors.
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bayes' Theorem
+====================
+
+      based on conditional probablity
+      
+      Bays theorem
+      
+          P(A|B) = P(A) . P(B | A) / P(B)
+      
+      the probablity of A given B, is the probablity of A times the
+      probablity of B given A over the probablity of B.
+      
+      
+      The key insight is that the probablity of something 
+      that depends on, B depends very much on the base 
+      probablity of B and A. People ignore this all the time .
+      
+
+
+
+Bayes' Theorem Basics
+------------------------
+Bayes' Theorem is used to update the probability
+of an event based on new evidence. 
+
+It is mathematically expressed as:
+
+    P ( A ∣ B ) =  P(B∣A)⋅ P(A) / P(B)
+    ​ 
+    Where:
+        P(A∣B): Probability of event A given B occurred (posterior probability).
+        P(B∣A): Probability of event B given A occurred (likelihood).
+        P(A): Probability of event A (prior probability).
+        P(B): Probability of event B (normalizing constant).
+      
+
+
+Key Takeaways:
+        Posterior Probability: 
+            Bayes' Theorem combines prior 
+            knowledge P(A)) with new evidence P(B∣A)).
+        
+        Normalization:
+            P(B) ensures probabilities add up to 1.
+        
+        Applications: 
+            Widely used in medical diagnostics, spam filtering, 
+            and predictive modeling.
+            
+
+
+
+
+
+
+Example 1: Medical Testing
+
+    Scenario:
+        A disease affects 1% of the population P(D)=0.01).
+        A test is 95% accurate for those with the disease P(T∣D)=0.95).
+        The test gives a false positive 5% of the time P(T∣∼D)=0.05).
+
+
+    Question: 
+          If a person tests positive, what is the probability
+          they actually have the disease P(D∣T))?
+
+
+
+      Solution:
+          Using Bayes' Theorem:
+          
+          
+          ComputeP(T):
+              P(T)=(0.95×0.01)+(0.05×0.99)=0.0095+0.0495=0.059
+          
+          Compute P(D∣T):
+          P(D∣T)= 0.95 * 0.01 / 0.059  ≈ 0.161
+          
+          
+          Result: If a person tests positive, the probability
+          they actually have the disease is approximately 16.1%.
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================================================
+docker run -d -p 8888:8888 huma11994/ml2025
+========================================================
+
+
+
+
+
+
+
+Create JUIPter from docker, SCRIPT
+===================================
+https://killercoda.com/killer-shell-cka/scenario/playground
+
+
+controlplane $ vi script.sh
+
+#!/bin/bash
+
+# Ensure the script exits on any error
+set -e
+
+# Create and navigate to the ML course directory
+mkdir -p MLCourse
+cd MLCourse
+
+# Download the course files.
+echo "Downloading MLCourse.zip..."
+wget -q https://dw9ne0o7jcasn.cloudfront.net/ml/MLCourse.zip
+
+# Unzip the course files
+unzip MLCourse.zip
+
+# Create the docker-compose.yaml file dynamically
+cat <<EOF > docker-compose.yaml
+version: '3.3'
+
+services:
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    container_name: jupyter_notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: >
+      start-notebook.sh --NotebookApp.token=''
+EOF
+
+echo "docker-compose.yaml created successfully."
+
+# Start the Docker container using docker-compose
+docker-compose up -d
+
+# Wait for the container to initialize
+sleep 3
+
+# Display port forwarding information
+echo "Forward port 8888 to access the Jupyter Notebook"
+echo "==============================================="
+echo "List of running containers:"
+docker ps
+
+
+
+
+
+
+
+
+......................
+chmod +x script.sh
+./script.sh
+
+
+
+
