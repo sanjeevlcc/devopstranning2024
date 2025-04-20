@@ -209,22 +209,46 @@ Finally, test the setup by accessing the Nextcloud instance via the web interfac
 
 # Create backup directory
 ---------------
-root@crimsonfileserver:~#  mkdir ~/nextcloud-backup
+root@crimsonfileserver:~# mkdir nextcloud_migration
+
+root@crimsonfileserver:~# hostname
+crimsonfileserver
+
+
+root@crimsonfileserver:~# hostname -I
+192.168.7.83
 
 
 
 
 # Backup Docker volumes
+------------------------------
 root@crimsonfileserver:~#  docker run --rm -v nextcloud-hospital-cct_db:/volume -v $PWD:/backup alpine \
     tar cvf /backup/db_volume_backup.tar -C /volume ./
 
 root@crimsonfileserver:~#  docker run --rm -v nextcloud-hospital-cct_nextcloud:/volume -v $PWD:/backup alpine \
     tar cvf /backup/nextcloud_volume_backup.tar -C /volume ./
 
+
+root@crimsonfileserver:~/nextcloud_migration# echo $?
+0
+
+
+
+
+
+
 # Backup configuration files
-root@crimsonfileserver:~#  cp -r ~/nextcloud-hospital-cct ~/nextcloud-backup/
+------------------------------
+root@crimsonfileserver:~/nextcloud_migration# cd ..
+root@crimsonfileserver:~# cp -r ~/nextcloud-hospital-cct/ ~/nextcloud_migration/
 
 
+root@crimsonfileserver:~/nextcloud_migration# ls -lh
+total 8.5G
+-rw-r--r-- 1 root root 267M Apr 20 15:23 db_volume_backup.tar
+drwxr-xr-x 7 root root 4.0K Apr 20 15:41 nextcloud-hospital-cct
+-rw-r--r-- 1 root root 8.2G Apr 20 15:35 nextcloud_volume_backup.tar
 
 
 
@@ -234,23 +258,70 @@ root@crimsonfileserver:~#  cp -r ~/nextcloud-hospital-cct ~/nextcloud-backup/
 
 2 Transfer Backup to New Server (192.168.5.67):
 +++++++++++++++++++++++++++++++++++++++++++++++
-On old server:
 
-scp -r ~/nextcloud-backup root@192.168.5.67:/root/
+1 On old server:
+---------------
+root@crimsonfileserver:~# # scp -r nextcloud_migration/ max@192.168.5.67/home/max/
+
+dhparam.pem                                   100%  424   535.0KB/s   00:00
+docker-compose.yaml                           100%  742     1.4MB/s   00:00
+nginx.conf                                    100%  827     1.7MB/s   00:00
+fullchain.pem                                 100%    0     0.0KB/s   00:00
+privkey.pem                                   100%    0     0.0KB/s   00:00
+dhparam.pem                                   100%    0     0.0KB/s   00:00
+db.env                                        100%  116   341.4KB/s   00:00
+db_volume_backup.tar                          100%  267MB  74.1MB/s   00:03
+nextcloud_volume_backup.tar                   100% 8377MB  60.3MB/s   02:18
+
+
+
+
+
+
 
 
 
 3 Prepare New Server:
 +++++++++++++++++++++
 
+root@supadeurali:~# hostname
+supadeurali
+
+root@supadeurali:~# hostname -I
+192.168.5.67
+
+root@supadeurali:~# whoami
+root
+
+root@supadeurali:~# mv /home/max/nextcloud_migration/ .
+
+
+
+root@supadeurali:~# ls -lh nextcloud_migration/
+total 8.5G
+-rw-r--r-- 1 max max 267M Apr 20 10:01 db_volume_backup.tar
+drwxr-xr-x 7 max max 4.0K Apr 20 10:01 nextcloud-hospital-cct
+-rw-r--r-- 1 max max 8.2G Apr 20 10:04 nextcloud_volume_backup.tar
+
+
 # Install Docker and Docker Compose
-sudo apt update && sudo apt install docker.io docker-compose -y
+root@supadeurali:~# sudo apt update && sudo apt install docker.io docker-compose -y
 
 
 
 
 # Create directory structure
-mkdir -p ~/nextcloud-hospital-cct/{certs,db_data,nextcloud_data,nginx/certs}
+-------------------------------------------
+root@supadeurali:~# mkdir -p ~/nextcloud-hospital-cct/{certs,db_data,nextcloud_data,nginx/certs}
+
+
+root@supadeurali:~# pwd
+/root
+
+root@supadeurali:~# ls -lh
+total 12K
+drwxr-xr-x 6 root root 4.0K Apr 20 10:26 nextcloud-hospital-cct
+drwxr-xr-x 3 max  max  4.0K Apr 20 10:01 nextcloud_migration
 
 
 
@@ -262,15 +333,74 @@ mkdir -p ~/nextcloud-hospital-cct/{certs,db_data,nextcloud_data,nginx/certs}
 
 4 Restore Data on New Server:
 ++++++++++++++++++++++++++++
+
+root@supadeurali:~# docker volume ls
+DRIVER    VOLUME NAME
+
+
+
 # Restore Docker volumes
+------------------------------
 docker run --rm -v nextcloud-hospital-cct_db:/volume -v $PWD:/backup alpine \
     tar xvf /backup/db_volume_backup.tar -C /volume
 
 docker run --rm -v nextcloud-hospital-cct_nextcloud:/volume -v $PWD:/backup alpine \
     tar xvf /backup/nextcloud_volume_backup.tar -C /volume
 
+
+
+
+
+root@supadeurali:~# cd nextcloud_migration/
+
+
+
+root@supadeurali:~/nextcloud_migration#  docker run --rm -v nextcloud-hospital-cct_db:/volume -v $PWD:/backup alpine \
+    tar xvf /backup/db_volume_backup.tar -C /volume
+
+
+root@supadeurali:~/nextcloud_migration# docker volume ls
+DRIVER    VOLUME NAME
+local     nextcloud-hospital-cct_db
+
+
+root@supadeurali:~/nextcloud_migration# ls -lh /var/lib/docker/volumes/nextcloud-hospital-cct_db/_data/
+
+
+root@supadeurali:~/nextcloud_migration# du -sh /var/lib/docker/volumes/nextcloud-hospital-cct_db/
+268M    /var/lib/docker/volumes/nextcloud-hospital-cct_db/
+
+
+
+
+
+root@supadeurali:~/nextcloud_migration# docker run --rm -v nextcloud-hospital-cct_nextcloud:/volume -v $PWD:/backup alpine \
+    tar xvf /backup/nextcloud_volume_backup.tar -C /volume
+
+
+
+
+root@supadeurali:~/nextcloud_migration# docker volume ls
+DRIVER    VOLUME NAME
+local     nextcloud-hospital-cct_db
+local     nextcloud-hospital-cct_nextcloud
+
+
+root@supadeurali:~/nextcloud_migration# ls -lh /var/lib/docker/volumes/nextcloud-hospital-cct_nextcloud/_data/
+
+root@supadeurali:~/nextcloud_migration# du -sh /var/lib/docker/volumes/nextcloud-hospital-cct_nextcloud/
+8.4G    /var/lib/docker/volumes/nextcloud-hospital-cct_nextcloud/
+
+
+
+
+
+
+
+
 # Restore configuration files
-cp -r ~/nextcloud-backup/nextcloud-hospital-cct/* ~/nextcloud-hospital-cct/
+-------------------------------------
+root@supadeurali:~/nextcloud_migration# cp -r ~/nextcloud-backup/nextcloud-hospital-cct/* ~/nextcloud-hospital-cct/
 
 
 
@@ -281,10 +411,10 @@ cp -r ~/nextcloud-backup/nextcloud-hospital-cct/* ~/nextcloud-hospital-cct/
 
 5 Update Configuration Files:
 ++++++++++++++++++++++++++++
-Modify the docker-compose.yaml if needed (update IPs/domains):
-
-# Ensure service names and environment variables match your original setup
-# Verify volume paths and port mappings
+	Modify the docker-compose.yaml if needed (update IPs/domains):
+	
+	# Ensure service names and environment variables match your original setup
+	# Verify volume paths and port mappings
 
 
 
@@ -293,8 +423,84 @@ Modify the docker-compose.yaml if needed (update IPs/domains):
 6 Start Services on New Server:
 ++++++++++++++++++++++++++++
 
-cd ~/nextcloud-hospital-cct
-docker-compose up -d
+
+
+root@supadeurali:~/nextcloud-hospital-cct#   cd ~/nextcloud-hospital-cct
+
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+alpine       latest    aded1e1a5b37   2 months ago   7.83MB
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+344260a3baa3   bridge    bridge    local
+e70d7ec7ebfd   host      host      local
+eb467808babe   none      null      local
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker volume ls
+DRIVER    VOLUME NAME
+local     nextcloud-hospital-cct_db
+local     nextcloud-hospital-cct_nextcloud
+
+
+
+
+root@supadeurali:~/nextcloud-hospital-cct#   docker-compose up -d
+
+Status: Downloaded newer image for nextcloud:latest
+Creating nextcloud-hospital-cct_db_1    ... done
+Creating nextcloud-hospital-cct_redis_1 ... done
+Creating nextcloud-hospital-cct_app_1   ... done
+
+
+
+
+
+
+
+
+oot@supadeurali:~/nextcloud-hospital-cct# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+nextcloud    latest    b151457b6932   4 weeks ago    1.42GB
+mariadb      latest    9f3d79eba61e   2 months ago   328MB
+alpine       latest    aded1e1a5b37   2 months ago   7.83MB
+redis        latest    65750d044ac8   3 months ago   117MB
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker ps
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+b6dbb6e39f3a   nextcloud:latest   "/entrypoint.sh apac…"   47 seconds ago   Up 42 seconds   0.0.0.0:9096->80/tcp, :::9096->80/tcp   nextcloud-hospital-cct_app_1
+53128175da79   redis              "docker-entrypoint.s…"   55 seconds ago   Up 46 seconds   6379/tcp                                nextcloud-hospital-cct_redis_1
+f8de36c871d9   mariadb            "docker-entrypoint.s…"   55 seconds ago   Up 46 seconds   3306/tcp                                nextcloud-hospital-cct_db_1
+
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker network ls
+NETWORK ID     NAME                             DRIVER    SCOPE
+344260a3baa3   bridge                           bridge    local
+e70d7ec7ebfd   host                             host      local
+979b91ca5a52   nextcloud-hospital-cct_default   bridge    local
+eb467808babe   none                             null      local
+
+
+
+
+root@supadeurali:~/nextcloud-hospital-cct# docker volume ls
+DRIVER    VOLUME NAME
+local     907faa2d8214953af1c0555f033c4b5b09bcbf68fa924c1308fbef246063f71e
+local     nextcloud-hospital-cct_db
+local     nextcloud-hospital-cct_nextcloud
+
+
+
 
 
 
@@ -321,7 +527,7 @@ docker exec -it nextcloud-hospital-cct-app-1 occ status
 ++++++++++++++++++++++++++++
 Update trusted domains in Nextcloud config if IP changed:
 
-docker exec -it nextcloud-hospital-cct-app-1 occ config:system:set trusted_domains 1 --value=192.168.5.67
+root@supadeurali:  docker exec -it nextcloud-hospital-cct-app-1 occ config:system:set trusted_domains 1 --value=192.168.5.67
 
 
 
@@ -329,15 +535,36 @@ docker exec -it nextcloud-hospital-cct-app-1 occ config:system:set trusted_domai
 Verify database connection:
 --------------------------
 
-docker exec -it nextcloud-hospital-cct-db-1 mysql -u yourmysqluser -p db
+root@supadeurali:  docker exec -it nextcloud-hospital-cct-db-1 mysql -u yourmysqluser -p db
 
 
 
 Test Redis connection:
 ------------------------
 
-docker exec -it nextcloud-hospital-cct-redis-1 redis-cli -a your_redis_password
+root@supadeurali:    docker exec -it nextcloud-hospital-cct-redis-1 redis-cli -a your_redis_password
 
+
+
+
+
+root@supadeurali:~/nextcloud-hospital-cct# tree
+.
+├── certs
+├── db_data
+├── db.env
+├── dhparam.pem
+├── docker-compose.yaml
+├── nextcloud_data
+├── nginx
+│   ├── certs
+│   │   ├── fullchain.pem
+│   │   └── privkey.pem
+│   ├── dhparam.pem
+│   └── nginx.conf
+└── nginx.conf
+
+7 directories, 7 files
 
 
 
@@ -399,13 +626,13 @@ Final Verification:
 at https://hospital-cloud.example.com
 
 2 Check file integrity:
-docker exec -it nextcloud-hospital-cct-app-1 occ files:scan --all
+root@supadeurali:  docker exec -it nextcloud-hospital-cct-app-1 occ files:scan --all
 
 
 
 
 3 Verify cron jobs are running:
-docker exec -it nextcloud-hospital-cct-app-1 occ background:cron
+root@supadeurali:  docker exec -it nextcloud-hospital-cct-app-1 occ background:cron
 
 
 
@@ -438,15 +665,13 @@ docker exec -it nextcloud-hospital-cct-app-1 occ config:system:set trusted_domai
 
 
 
+root@supadeurali:~/nextcloud-hospital-cct# docker exec -ti nextcloud-hospital-cct_app_1 bash
 
-su - www-data -s /bin/bash -c "php /var/www/html/occ config:system:set trusted_domains 1 --value=192.168.5.67"
-su - www-data -s /bin/bash -c "php /var/www/html/occ config:system:get trusted_domains"
-
-
-
-
-php occ config:system:get trusted_domains
-
+root@b6dbb6e39f3a:/var/www/html#  su - www-data -s /bin/bash -c "php /var/www/html/occ config:system:set trusted_domains 1 --value=192.168.5.67"
+root@b6dbb6e39f3a:/var/www/html#  su - www-data -s /bin/bash -c "php /var/www/html/occ config:system:get trusted_domains"
+root@b6dbb6e39f3a:/var/www/html#  php occ config:system:get trusted_domains
+				103.254.186.194:8081
+				192.168.5.67
 
 
 
@@ -458,7 +683,7 @@ php occ config:system:get trusted_domains
 
 
 
-root@bhiravasters:~/nextcloud-hospital-cct# docker exec -it nextcloud-hospital-cct-app-1 bash
+root@supadeurali:~/nextcloud-hospital-cct# docker exec -ti nextcloud-hospital-cct_app_1 bash
 
 root@354f6465bd63:/var/www/html# php occ user:resetpassword mahesh
 Enter a new password: Computer2082
