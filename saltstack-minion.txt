@@ -1,0 +1,446 @@
+
+
+==========================================================
+Salt and SaltStack: Overview and Comparison
+==========================================================
+
+What is Salt and SaltStack?
+Salt (also known as SaltStack) is an open-source configuration 
+management and remote execution tool. It uses a master-minion architecture
+to manage and automate the configuration of servers and systems at scale.
+
+Key features:
+---------------------
+      Uses a push model for configuration management
+      Built on Python
+      Uses ZeroMQ for high-speed communication
+      Offers both imperative and declarative configuration
+      Provides real-time monitoring and remote execution capabilities
+      
+
+
+==========================================================
+Comparison with Puppet and Ansible
+==========================================================
+
+Feature	              SaltStack	       	           Puppet	        Ansible
+--------------------------------------------------------------------------------
+Architecture	        Master-Minion	          	Master-Agent	    Agentless (SSH)
+Language		          Python		          	    Ruby	          	Python
+Configuration	        YAML + Jinja	          	Puppet DSL	      YAML
+Speed	          	    Very fast (ZeroMQ)	      Moderate	        Moderate (SSH)
+Scalability	          Excellent		         	    Good		          Good
+Learning Curve	      Moderate		          	  Steep		          Gentle
+Real-time		          Yes	          		         No	          	  No
+Data Transport		    Encrypted messages		     HTTPS	          SSH
+
+
+
+
+
+
+
+
+
+==========================================================
+Applications of SaltStack
+==========================================================
+
+Configuration management
+Remote execution
+Infrastructure automation
+Continuous deployment
+Cloud provisioning
+Network automation
+Monitoring and alerting
+
+
+
+
+
+
+
+
+
+
+==========================================================
+Listing  Up Salt Master and Minions
+==========================================================
+
+
+
+Configure master as 
+---------------------------
+root@lxc-palpa:~# hostname
+lxc-palpa
+root@lxc-palpa:~# hostname  -I
+192.168.5.225
+
+
+and 2 minions as 
+-----------------------
+root@lxc-minion1-butwal:~# hostname
+lxc-minion1-butwal
+root@lxc-minion1-butwal:~# hostname -I
+192.168.5.246
+
+
+root@lxc-minion1-pokhara:~# hostname
+lxc-minion1-pokhara
+root@lxc-minion1-pokhara:~# hostname  -I
+192.168.5.253
+
+
+
+
+
+
+
+
+==========================================================
+Case Scenario: Setting Up Salt Master and Minions
+==========================================================
+
+https://docs.saltproject.io/salt/install-guide/en/latest/
+
+https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/linux-deb.html
+
+
+
+Run the following command to install the Salt Project repository:
+------------------------------------------------------------------------
+
+# Ensure keyrings dir exists
+mkdir -p /etc/apt/keyrings
+# Download public key
+curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | sudo tee /etc/apt/keyrings/salt-archive-keyring.pgp
+# Create apt repo target configuration
+curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | sudo tee /etc/apt/sources.list.d/salt.sources
+
+sudo apt update
+sudo apt get install vim -y
+
+
+
+
+Available installs:
+
+sudo apt-get install salt-master
+sudo apt-get install salt-minion
+sudo apt-get install salt-ssh
+sudo apt-get install salt-syndic
+sudo apt-get install salt-cloud
+sudo apt-get install salt-api
+
+
+
+
+1. Install Salt Master on the master server (192.168.5.225)
+---------------------------------------------------------------
+# On master server (lxc-palpa)
+sudo apt-get update
+sudo apt-get install -y salt-master
+
+
+
+
+
+
+
+
+2. Install Salt Minion on both minion servers
+---------------------------------------------------------------
+# On both minion servers (192.168.5.246 and 192.168.5.253)
+sudo apt-get update
+sudo apt-get install -y salt-minion
+
+
+
+
+
+
+
+
+3. Configure the minions to point to the master
+---------------------------------------------------------------
+
+On each minion, edit the configuration file:
+
+sudo nano /etc/salt/minion
+master: 192.168.5.225        #Set the master IP:
+
+
+
+
+
+4. Restart services
+---------------------------------------------------------------
+# On master
+sudo systemctl restart salt-master
+
+# On minions
+sudo systemctl restart salt-minion
+
+
+
+5. Accept minion keys on the master
+---------------------------------------------------------------
+# On master server
+sudo salt-key -L  # List all keys
+
+# Accept all pending keys
+sudo salt-key -A
+
+# Or accept specific keys
+sudo salt-key -a lxc-minion1-butwal
+sudo salt-key -a lxc-minion1-pokhara
+
+
+
+6. Verify connectivity
+---------------------------------------------------------------
+
+# On master, test ping to all minions
+sudo salt '*' test.ping
+
+# You should see:
+# lxc-minion1-butwal:
+#     True
+# lxc-minion1-pokhara:
+#     True
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------
+
+
+==========================================================
+
+==========================================================
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
