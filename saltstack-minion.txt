@@ -23,16 +23,16 @@ Key features:
 Comparison with Puppet and Ansible
 ==========================================================
 
-Feature	              SaltStack	       	           Puppet	        Ansible
---------------------------------------------------------------------------------
+   Feature	                SaltStack	       	   Puppet	           Ansible
+------------------------------------------------------------------------------------------
 Architecture	        Master-Minion	          	Master-Agent	    Agentless (SSH)
-Language		          Python		          	    Ruby	          	Python
-Configuration	        YAML + Jinja	          	Puppet DSL	      YAML
-Speed	          	    Very fast (ZeroMQ)	      Moderate	        Moderate (SSH)
-Scalability	          Excellent		         	    Good		          Good
-Learning Curve	      Moderate		          	  Steep		          Gentle
-Real-time		          Yes	          		         No	          	  No
-Data Transport		    Encrypted messages		     HTTPS	          SSH
+Language		        Python		          	Ruby	          	    Python
+Configuration	        YAML + Jinja	          	Puppet DSL	          YAML
+Speed	          	        Very fast (ZeroMQ)	      Moderate	          Moderate (SSH)
+Scalability	              Excellent		         	Good		          Good
+Learning Curve	        Moderate		          	Steep		          Gentle
+Real-time		        Yes	          		      No	          	     No
+Data Transport		  Encrypted messages		HTTPS	                SSH
 
 
 
@@ -220,9 +220,503 @@ sudo salt '*' test.ping
 ---------------------------------------------------------------
 
 
-==========================================================
+
+
+
+
+
+
+
+
+
+
 
 ==========================================================
+Example Configuration Management
+==========================================================
+
+
+
+
+
+Create a top file on the master
+---------------------------------------------------------------
+sudo mkdir -p /srv/salt/
+
+sudo nano /srv/salt/top.sls
+base:
+  '*':
+    - common
+  'lxc-minion1-butwal':
+    - butwal.specific
+  'lxc-minion1-pokhara':
+    - pokhara.specific
+
+
+
+
+
+Create state files
+---------------------------------------------------------------
+sudo nano /srv/salt/common.sls
+common_packages:
+  pkg.installed:
+    - pkgs:
+      - curl
+      - git
+      - htop
+      - mc
+
+
+
+
+
+butwal.specific.sls
+---------------------------------------------------------------
+
+sudo nano /srv/salt/butwal.specific.sls
+
+butwal_config:
+  file.managed:
+    - name: /etc/butwal.conf
+    - contents: |
+        location=Butwal
+        timezone=Asia/Kathmandu
+
+
+
+
+
+pokhara.specific.sls
+---------------------------------------------------------------
+
+
+sudo nano /srv/salt/pokhara.specific.sls
+
+pokhara_config:
+  file.managed:
+    - name: /etc/pokhara.conf
+    - contents: |
+        location=Pokhara
+        timezone=Asia/Kathmandu
+
+
+
+
+
+Apply the states
+---------------------------------------------------------------
+
+# Apply to all minions
+sudo salt '*' state.apply
+
+# Apply to specific minion
+sudo salt 'lxc-minion1-butwal' state.apply
+
+
+
+
+This setup demonstrates a basic SaltStack configuration where:
+      All minions get common packages installed
+      Each minion gets location-specific configuration files
+      You can manage configurations centrally from the master server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+Advanced SaltStack Configuration Management Examples
+==========================================================
+
+
+Here are several practical examples of configuration management using SaltStack
+in your environment with 1 master and 2 minions.
+
+
+Applications of SaltStack
+****************************************
+Configuration management   <<<<<<<<<<<<<<<<<<<<<<<<,
+Remote execution
+Infrastructure automation
+Continuous deployment
+Cloud provisioning
+Network automation
+Monitoring and alerting
+
+
+
+
+
+1. User Management
+*************************************************************
+
+
+
+
+Create a state to manage users across all minions
+--------------------------------------------
+root@lxc-palpa:~# cat /srv/salt/users.sls
+admin-user:
+  user.present:
+    - name: binita
+    - fullname: Binita Phoungja Magar
+    - shell: /bin/bash
+    - home: /home/binita
+    - groups:
+      - sudo
+    - password: '$6$rounds=656000$saltstring$hashedpassword'  # Use mkpasswd to generate
+
+remove-test-user:
+  user.absent:
+    - name: test
+
+
+
+
+
+
+
+
+Add to top.sls:
+----------------------
+root@lxc-palpa:~# cat /srv/salt/top.sls
+base:
+  '*':
+    - common
+    - users            # <<<<<<<<<<<<<
+  'lxc-minion1-butwal':
+    - butwal.specific
+  'lxc-minion1-pokhara':
+    - pokhara.specific
+
+
+
+
+
+apply the rules
+----------------------
+root@lxc-palpa:~# salt '*' state.apply
+lxc-minion1-butwal.com:
+----------
+          ID: common_packages
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 00:58:23.831806
+    Duration: 18.881 ms
+     Changes:
+----------
+          ID: admin-user
+    Function: user.present
+        Name: binita
+      Result: True
+     Comment: User binita is present and up to date
+     Started: 00:58:23.852118
+    Duration: 1.072 ms
+     Changes:
+----------
+          ID: remove-test-user
+    Function: user.absent
+        Name: test
+      Result: True
+     Comment: User test is not present
+     Started: 00:58:23.853236
+    Duration: 0.386 ms
+     Changes:
+
+Summary for lxc-minion1-butwal.com
+------------
+Succeeded: 3
+Failed:    0
+------------
+Total states run:     3
+Total run time:  20.339 ms
+lxc-minion1-pokhara.com:
+----------
+          ID: common_packages
+    Function: pkg.installed
+      Result: True
+     Comment: All specified packages are already installed
+     Started: 00:58:23.881743
+    Duration: 10.733 ms
+     Changes:
+----------
+          ID: admin-user
+    Function: user.present
+        Name: binita
+      Result: True
+     Comment: User binita is present and up to date
+     Started: 00:58:23.892861
+    Duration: 0.966 ms
+     Changes:
+----------
+          ID: remove-test-user
+    Function: user.absent
+        Name: test
+      Result: True
+     Comment: User test is not present
+     Started: 00:58:23.893869
+    Duration: 0.426 ms
+     Changes:
+
+Summary for lxc-minion1-pokhara.com
+------------
+Succeeded: 3
+Failed:    0
+------------
+Total states run:     3
+Total run time:  12.125 ms
+
+
+
+
+
+
+
+
+
+
+
+verify the rules is been updated or not on both minions 
+--------------------------------------------
+
+
+root@lxc-minion1-butwal:~# cat /etc/passwd | grep binita            
+admin:x:1001:1001:Binita Phoungja Magar:/home/binita:/bin/bash
+binita:x:1002:1002:Binita Phoungja Magar:/home/binita:/bin/bash           # minion server first
+
+
+
+root@lxc-minion1-pokhara:~# cat /etc/passwd | grep binita
+admin:x:1001:1001:Binita Phoungja Magar:/home/binita:/bin/bash
+binita:x:1002:1002:Binita Phoungja Magar:/home/binita:/bin/bash           # minion server first
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Package Management
+*************************************************************
+
+
+Install different packages based on server role
+----------------------------------------------
+
+
+root@lxc-palpa:~# cat /srv/salt/packages.sls
+base_packages:
+  pkg.installed:
+    - pkgs:
+      - vim
+      - tmux
+      - net-tools
+
+web_packages:
+  pkg.installed:
+    - pkgs:
+      - nginx
+      - php-fpm
+    - require:
+      - pkg: base_packages
+
+db_packages:
+  pkg.installed:
+    - pkgs:
+      - mysql-server
+      - mysql-client
+    - require:
+      - pkg: base_packages
+
+
+
+
+
+
+Update top.sls:
+----------------------------------------------
+
+root@lxc-palpa:~# cat /srv/salt/top.sls
+base:
+  '*':
+    - common
+    - users
+    - packages.base_packages
+
+  'lxc-minion1-butwal':
+    - packages.web_packages
+  'lxc-minion1-pokhara':
+    - packages.db_packages
+
+  'lxc-minion1-butwal':
+    - butwal.specific
+  'lxc-minion1-pokhara':
+    - pokhara.specific
+root@lxc-palpa:~#
+
+
+
+
+
+
+PRE verification PACKAGES is been  on both minions or not?????
+----------------------------------------------
+
+root@lxc-minion1-butwal:~# vim
+root@lxc-minion1-butwal:~# tmux                        #<<<<<<<<<<<< not installed 
+Command 'tmux' not found, but can be installed with:
+apt install tmux
+root@lxc-minion1-butwal:~# net-tools                     #<<<<<<<<<<<< not installed 
+net-tools: command not found
+
+
+
+root@lxc-minion1-pokhara:~# nginx                     #<<<<<<<<<<<< not installed 
+Command 'nginx' not found, but can be installed with:
+apt install nginx
+root@lxc-minion1-pokhara:~# php                       #<<<<<<<<<<<< not installed 
+Command 'php' not found, but can be installed with:
+apt install php8.3-cli  # version 8.3.11-0ubuntu0.24.10.4, or
+apt install php-cli     # version 2:8.3+93ubuntu2
+root@lxc-minion1-pokhara:~# mysql                           #<<<<<<<<<<<< not installed 
+Command 'mysql' not found, but can be installed with:
+apt install mysql-client-core-8.0  # version 8.0.41-0ubuntu0.24.10.1, or
+apt install mariadb-client-core    # version 1:11.4.5-0ubuntu0.24.10.1
+
+
+
+
+
+
+
+
+
+Install different packages based on server role
+--------------------------------------------
+
+
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+
+
+
+
+
+
+verify the rules is been updated or not on both minions 
+--------------------------------------------
+
+
+
+
+
+
+*************************************************************
+
+
+
+--------------------------------------------
+
+
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+
+
+
+
+
+
+verify the rules is been updated or not on both minions 
+--------------------------------------------
+
+
+
+
+*************************************************************
+
+
+
+
+
+--------------------------------------------
+
+
+
+
+
+
+
+
+----------------------------------------------
+
+
+
+
+
+
+
+
+
+verify the rules is been updated or not on both minions 
+--------------------------------------------
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
 
 
 ---------------------------------------------------------------
@@ -243,6 +737,109 @@ sudo salt '*' test.ping
 
 
 
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+
+==========================================================
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
 
 
 
@@ -260,14 +857,43 @@ sudo salt '*' test.ping
 
 
 
+---------------------------------------------------------------
 
 
 
 
 
-==========================================================
 
-==========================================================
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+---------------------------------------------------------------
 
 
 
