@@ -1,0 +1,374 @@
+
+----------------------------------------------------
+DOCKER TECHNOLOGY SYLLABUS (10 HOURS)
+----------------------------------------------------
+
+Target: BSc CSIT / BCA / BIM (5th–8th Semester Students)
+
+Prerequisites: HTML, CSS, PHP, Python, Java, basic programming knowledge
+
+
+
+--------------------------------------------------
+1. Introduction to Virtualization & Containers (1 Hour)
+--------------------------------------------------
+    • Traditional software deployment problems
+    • “Works on my machine” problem
+    • Introduction to virtualization
+    • Virtual Machines vs Containers
+    • What is containerization
+    • Why Docker is used in modern development
+    • Basic Docker architecture
+    • Real-world industry usage of Docker
+    
+    Practical
+    • Demonstration of VM vs container concept
+    • Run first container using docker hello-world
+
+
+
+
+
+
+
+--------------------------------------------------
+2. Linux Basics for Docker (1 Hour)
+--------------------------------------------------
+        • Why Linux knowledge is important for Docker
+        • Basic Linux file system overview
+        • Terminal usage basics
+        
+                Important Commands
+                      • pwd
+                      • ls
+                      • cd
+                      • mkdir
+                      • touch
+                      • cp
+                      • mv
+                      • rm
+                      • cat
+                      • echo
+        
+        Concepts
+        • File permissions
+        • Installing packages (apt)
+        
+        Practical
+        • Navigate directories
+        • Create and delete files from terminal
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+3. Docker Installation & Setup (1 Hour)
+--------------------------------------------------
+    • Installing Docker on Windows
+    • Installing Docker on Linux
+    • Installing Docker Desktop
+    • Docker CLI overview
+    • Docker daemon concept
+    • Verifying installation
+    
+    Commands
+        • docker --version
+        • docker info
+        • docker run hello-world
+    
+    Practical
+        • Install Docker
+        • Run first Docker container
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+4. Docker Fundamentals (1.5 Hours)
+--------------------------------------------------
+      Concepts
+        • Docker Images
+        • Docker Containers
+        • Docker Hub
+        • Image vs Container
+        • Container lifecycle
+      
+      Commands
+        • docker pull
+        • docker run
+        • docker ps
+        • docker ps -a
+        • docker stop
+        • docker start
+        • docker rm
+        • docker images
+      
+      Practical
+        • Pull image from Docker Hub
+        • Run Ubuntu container
+        • Run nginx container
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+5. Working with Containers (1.5 Hours)
+--------------------------------------------------
+      Concepts
+      • Interactive containers
+      • Container ports
+      • Container logs
+      • Executing commands inside containers
+      • Naming containers
+      
+      Commands
+      • docker exec
+      • docker logs
+      • docker port
+      • docker inspect
+      
+      Practical
+      • Run container with port mapping
+      • Access web server from browser
+      
+      Example
+      • docker run -p 8080:80 nginx
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+6. Docker Images & Dockerfile (2 Hours)
+--------------------------------------------------
+    Concepts
+    • What is Dockerfile
+    • Structure of Dockerfile
+    • Layered architecture
+    
+    Important Instructions
+    • FROM
+    • RUN
+    • COPY
+    • ADD
+    • WORKDIR
+    • CMD
+    • EXPOSE
+    • ENV
+    
+    Commands
+    • docker build
+    • docker tag
+    • docker push
+    
+    Practical
+    • Create Dockerfile for simple web application
+    • Build Docker image
+    • Run custom container
+    
+    Example Applications
+    • Python Flask app
+    • PHP website
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+7. Docker Volumes & Data Persistence (1 Hour)
+--------------------------------------------------
+    Concepts
+    • Container data loss problem
+    • Persistent storage
+    • Bind mounts
+    • Docker volumes
+    
+    Commands
+    • docker volume create
+    • docker volume ls
+    • docker volume inspect
+    • docker volume rm
+    
+    Practical
+    • Create volume
+    • Attach volume to container
+    
+    Example
+    • docker run -v mydata:/data ubuntu
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+8. Docker Networking (1 Hour)
+--------------------------------------------------
+    Concepts
+    • Container networking
+    • Bridge network
+    • Host network
+    • Container communication
+    
+    Commands
+    • docker network ls
+    • docker network create
+    • docker network inspect
+    • docker network connect
+    
+    Practical
+    • Connect two containers
+    • App container communicating with database container
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+9. Docker Compose (Multi-Container Applications) (1 Hour)
+--------------------------------------------------
+    Concepts
+    • Problems with multiple containers
+    • Introduction to Docker Compose
+    • docker-compose.yml structure
+    
+    Commands
+    • docker compose up
+    • docker compose down
+    • docker compose ps
+    
+    Practical
+    • Run web application with database
+    
+    Example Stack
+    • Web App (Python / Node / PHP)
+    • Database (MySQL / PostgreSQL)
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+10. Real World Usage & Deployment (0.5 Hour)
+--------------------------------------------------
+Concepts
+• Docker in DevOps
+• Docker in microservices architecture
+• CI/CD integration
+• Docker in cloud environments
+• Introduction to Kubernetes (conceptual)
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+Mini Hands-on Project
+--------------------------------------------------
+        Dockerized Web Application
+        
+        Steps
+              • Create simple web application
+              • Write Dockerfile
+              • Build Docker image
+              • Run container
+              • Map ports
+              • Use volume for persistence
+              • Access application from browser
+
+
+
+
+
+
+
+--------------------------------------------------
+Tools Required
+--------------------------------------------------
+        • Docker Desktop
+        • Linux Terminal
+        • VS Code
+        • Git (optional)
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+Learning Outcomes
+--------------------------------------------------
+After completing the session students will be able to:
+
+      • Understand containerization concepts
+      • Install and configure Docker
+      • Run and manage containers
+      • Build custom Docker images
+      • Write Dockerfiles
+      • Use volumes for persistent storage
+      • Manage container networking
+      • Deploy multi-container applications using Docker Compose
+
+
+
+
