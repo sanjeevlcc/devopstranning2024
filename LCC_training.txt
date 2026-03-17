@@ -3,7 +3,7 @@
 DOCKER TECHNOLOGY SYLLABUS (10 HOURS)
 ----------------------------------------------------
 
-Target: BSc CSIT / BCA / BIM (5th–8th Semester Students)
+Target: BSc CSIT / BCA / BIM / BICTE/ BIT/ (5th , 6th, 7th, 8th Semester Students)
 
 Prerequisites: HTML, CSS, PHP, Python, Java, basic programming knowledge
 
